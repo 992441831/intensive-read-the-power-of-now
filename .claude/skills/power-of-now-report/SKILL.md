@@ -59,7 +59,7 @@ HTML 内容与 Markdown 对应转换：`> [!NOTE/IMPORTANT/WARNING/TIP]` → 带
 ## 第 4 步：提交并推送
 
 ```bash
-git add reports/NN-*.md docs/<slug>.html docs/index.html README.md .claude/skills/
+git add reports/NN-*.md docs/<slug>.html docs/index.html README.md .claude/skills/ .claude/settings.local.json
 git commit -m "新增第NN篇：<标题>（<风格名> HTML）"  # 附 Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>
 git push
 # 若 push 连接 github.com 失败，直接重试：
@@ -67,7 +67,7 @@ git -c http.proxy=http://127.0.0.1:10808 -c https.proxy=http://127.0.0.1:10808 p
 # 10808 不通再依次试 7890 / 7897 / 10809
 ```
 
-不要提交 `.idea/`、`.claude/settings.local.json` 等无关文件。
+`.claude/settings.local.json` 也在提交范围内（本仓库约定将其纳入版本管理，便于跨机器同步权限配置）。提交前扫一眼其中是否有敏感信息（token、密钥），若有则先剔除。不要提交 `.idea/` 等无关文件。
 
 ## 第 5 步：汇报
 
