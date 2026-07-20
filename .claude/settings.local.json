@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C 'E:/study/idea-code-lib/intensive-read-the-power-of-now' remote -v)"
+    ]
+  }
+}
