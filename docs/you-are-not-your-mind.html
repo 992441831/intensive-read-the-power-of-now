@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>你不是你的大脑 —— 思维认同与精神内耗 ｜ 精读《当下的力量》01</title>
+<style>
+  :root{
+    --night-1:#050818; --night-2:#0b1230; --night-3:#141c44;
+    --star:#e8ecff; --moon:#f4e8c8; --ink:#dfe5f7; --ink-dim:#9aa5cd;
+    --accent:#8fb7ff; --gold:#e8c97a;
+    --card:rgba(20,28,68,.55); --line:rgba(143,183,255,.22);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif;
+    background:linear-gradient(180deg,var(--night-1) 0%,var(--night-2) 45%,var(--night-3) 100%);
+    color:var(--ink); line-height:1.9; overflow-x:hidden;
+  }
+  /* ———— 星空 ———— */
+  .stars,.stars2,.stars3{position:fixed;inset:0;pointer-events:none;z-index:0}
+  .stars i,.stars2 i,.stars3 i{position:absolute;background:var(--star);border-radius:50%;animation:twinkle 3s ease-in-out infinite}
+  @keyframes twinkle{0%,100%{opacity:.15}50%{opacity:.9}}
+  .stars i{width:2px;height:2px}.stars2 i{width:1.5px;height:1.5px;animation-duration:4.5s}
+  .stars3 i{width:1px;height:1px;animation-duration:6s}
+  /* ———— 呼吸月晕 ———— */
+  .breath{
+    position:fixed;top:8%;right:6%;width:220px;height:220px;border-radius:50%;
+    background:radial-gradient(circle,rgba(244,232,200,.35) 0%,rgba(244,232,200,.12) 40%,transparent 70%);
+    animation:breathe 8s ease-in-out infinite;pointer-events:none;z-index:0;
+  }
+  .breath::after{content:"";position:absolute;inset:38%;border-radius:50%;
+    background:radial-gradient(circle,var(--moon) 0%,#e8d8a8 80%);
+    box-shadow:0 0 40px rgba(244,232,200,.5)}
+  @keyframes breathe{0%,100%{transform:scale(1);opacity:.75}50%{transform:scale(1.12);opacity:1}}
+  /* ———— 布局 ———— */
+  .wrap{position:relative;z-index:1;max-width:820px;margin:0 auto;padding:64px 22px 96px}
+  header{text-align:center;padding:56px 0 40px;border-bottom:1px solid var(--line)}
+  .series{letter-spacing:.5em;font-size:12px;color:var(--ink-dim);text-transform:uppercase;margin-bottom:22px}
+  h1{font-size:2.5rem;font-weight:700;letter-spacing:.06em;color:var(--star);
+     text-shadow:0 0 24px rgba(143,183,255,.45)}
+  .subtitle{margin-top:26px;font-size:1.05rem;color:var(--moon);font-style:italic;opacity:.92}
+  .meta{margin-top:20px;font-size:.8rem;color:var(--ink-dim);letter-spacing:.05em}
+  h2{font-size:1.5rem;margin:64px 0 26px;color:var(--star);padding-left:16px;
+     border-left:3px solid var(--accent);letter-spacing:.04em}
+  h3{font-size:1.12rem;margin:38px 0 14px;color:var(--accent)}
+  p{margin:14px 0}
+  strong{color:var(--star)}
+  em{color:var(--moon)}
+  ul,ol{margin:12px 0 12px 24px}
+  li{margin:8px 0}
+  /* ———— 引文 ———— */
+  blockquote{
+    margin:26px 0;padding:22px 26px;position:relative;
+    background:rgba(232,201,122,.06);border:1px solid rgba(232,201,122,.25);
+    border-radius:10px;font-style:italic;color:var(--moon);
+  }
+  blockquote::before{content:"“";position:absolute;top:-18px;left:14px;font-size:56px;
+    color:var(--gold);opacity:.55;font-family:Georgia,serif}
+  blockquote cite{display:block;margin-top:10px;font-style:normal;font-size:.82rem;color:var(--ink-dim)}
+  /* ———— 提示框 ———— */
+  .callout{margin:26px 0;padding:18px 22px;border-radius:10px;background:var(--card);
+    border:1px solid var(--line);backdrop-filter:blur(4px)}
+  .callout .tag{display:inline-block;font-size:.72rem;letter-spacing:.18em;padding:2px 12px;
+    border-radius:999px;margin-bottom:10px;font-weight:600}
+  .callout.note{border-color:rgba(143,183,255,.45)} .callout.note .tag{background:rgba(143,183,255,.18);color:var(--accent)}
+  .callout.important{border-color:rgba(232,201,122,.45)} .callout.important .tag{background:rgba(232,201,122,.16);color:var(--gold)}
+  .callout.warning{border-color:rgba(255,140,140,.45)} .callout.warning .tag{background:rgba(255,140,140,.14);color:#ff9c9c}
+  .callout.tip{border-color:rgba(140,230,190,.4)} .callout.tip .tag{background:rgba(140,230,190,.14);color:#8ce6be}
+  /* ———— 表格 ———— */
+  .table-box{overflow-x:auto;margin:26px 0;border-radius:10px;border:1px solid var(--line)}
+  table{width:100%;border-collapse:collapse;font-size:.92rem;background:var(--card)}
+  th{background:rgba(143,183,255,.12);color:var(--star);padding:13px 16px;text-align:left;
+     border-bottom:1px solid var(--line);white-space:nowrap}
+  td{padding:12px 16px;border-bottom:1px solid rgba(143,183,255,.1);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  td:first-child{font-weight:700;color:var(--accent);white-space:nowrap}
+  /* ———— 练习步骤 ———— */
+  .step{margin:18px 0;padding:18px 20px;border:1px solid var(--line);border-radius:10px;
+    background:var(--card);position:relative;padding-left:70px}
+  .step .num{position:absolute;left:18px;top:18px;width:34px;height:34px;border-radius:50%;
+    border:1px solid var(--accent);color:var(--accent);display:flex;align-items:center;
+    justify-content:center;font-weight:700;font-size:.95rem}
+  .step .concept{font-size:.75rem;color:var(--ink-dim);letter-spacing:.08em;margin-top:6px}
+  hr{border:none;height:1px;background:var(--line);margin:56px 0}
+  footer{text-align:center;color:var(--ink-dim);font-size:.8rem;margin-top:24px}
+  footer a{color:var(--accent);text-decoration:none}
+  .nav-back{display:inline-block;margin-top:30px;color:var(--accent);text-decoration:none;
+    border:1px solid var(--line);padding:8px 22px;border-radius:999px;font-size:.85rem;
+    transition:background .3s}
+  .nav-back:hover{background:rgba(143,183,255,.12)}
+  @media (max-width:640px){
+    h1{font-size:1.8rem}
+    h2{font-size:1.25rem}
+    .breath{width:130px;height:130px;top:5%;right:4%}
+    .wrap{padding:40px 16px 72px}
+  }
+</style>
+</head>
+<body>
+
+<div class="stars" id="stars1"></div>
+<div class="stars2" id="stars2"></div>
+<div class="stars3" id="stars3"></div>
+<div class="breath"></div>
+
+<div class="wrap">
+
+<header>
+  <div class="series">精读《当下的力量》 · 第 01 篇</div>
+  <h1>🧠 你不是你的大脑</h1>
+  <div class="subtitle">思维认同与精神内耗</div>
+  <blockquote style="max-width:560px;margin:30px auto 0;text-align:left">
+    "你不等于你的大脑。"
+    <cite>—— 埃克哈特·托利《当下的力量》</cite>
+  </blockquote>
+  <div class="meta">文本依据：《当下的力量》（曹植译，中信出版社）第一章「你不等于你的大脑」 ｜ 2026-07-20</div>
+</header>
+
+<div class="callout note">
+  <span class="tag">核心论点</span>
+  <p>困扰当代人的"精神内耗"，根源不是意志力不够、不是压力太大、甚至不是信息太多，而是一个更深层的问题——<strong>我们把"思维"误认成了"我"</strong>。托利称之为"思维认同"：你不是在思考，而是被思考；你以为脑子里的声音是你，于是它彻夜不停，你也彻夜难眠。内耗的终结不在于"想通"，而在于发现一个比思维更深的你——那个能听见思维的观察者。</p>
+</div>
+
+<h2>一、引言：停不下来的脑子</h2>
+
+<p>2026 年，"精神内耗"仍然是中文互联网上最持久的流行词之一。它有一组越来越具体的症状：</p>
+<ul>
+  <li>明明躺下了，脑子却在开复盘会：白天那句话是不是说错了，明天的汇报会不会搞砸；</li>
+  <li>打开短视频只想看五分钟，抬头已是凌晨一点，放下手机后涌起一阵空虚与自我厌恶；</li>
+  <li>周末什么都没干，却比上班还累——因为大脑一整天都在"后台运行"；</li>
+  <li>AI 让信息生产的速度再翻一倍，待读列表、未读消息、推送通知像永远还不完的债。</li>
+</ul>
+<p>我们并非没有自救。正念 App 成了百亿规模的产业，冥想课程进入大厂的员工福利包，"松弛感"成为消费品牌最爱贩卖的人设。可是悖论在于：<strong>越是努力"管理"自己的情绪和注意力，许多人越是感到被另一个自己消耗</strong>。</p>
+
+<div class="callout important">
+  <span class="tag">问题的提出</span>
+  <p>主流解释把内耗归结为三个层次——意志力不够（所以你该自律）、压力太大（所以你该减压）、多巴胺成瘾（所以你该数字戒断）。这些解释都有道理，但都默认了一个前提：脑子里那个喋喋不休的声音<strong>就是你</strong>，你只能跟它搏斗、给它喂药、或者求它安静。</p>
+  <p>托利在《当下的力量》开篇就推翻了这个前提：那个声音不是你。<strong>开悟的最大障碍，就是认同于思维。</strong>内耗不是一种需要被管理的情绪，而是一种错误的自我认知——你把自己锁在了一个由念头构成的牢笼里，还把牢笼当成了自己。</p>
+</div>
+
+<h2>二、概念基石：思维认同、小我与观察者</h2>
+
+<h3>2.1 思维认同：你把"我思"当成了"我在"</h3>
+<blockquote>
+  "你不等于你的大脑。"
+  <cite>—— 《当下的力量》第一章</cite>
+</blockquote>
+<p>自笛卡尔"我思故我在"以来，现代人默认了思考与存在的同一性：我在思考，所以我存在；我思考的内容，构成了"我"。托利指出这是一个致命的混淆——<strong>思维只是意识的一个工具、一个面向，而意识本身远大于思维</strong>。当你把工具当成了主人，工具就开始无休止地空转：它不需要真的在解决什么问题，它只是在自我运转中维持"你存在"的幻觉。</p>
+<p>这就是为什么绝大多数的思考是<strong>无用的、重复的、强迫性的</strong>。托利称之为"强迫性思考"（compulsive thinking）：不是你在思考，而是思考在"你"身上发生，并且你无法喊停。</p>
+
+<h3>2.2 小我：由思维虚构的自我</h3>
+<p>思维认同的直接产物是<strong>小我</strong>（ego）——一个由念头、记忆、身份标签、社会角色拼贴起来的"心理自我"。小我有两个关键特征：</p>
+<ol>
+  <li><strong>它靠认同存活</strong>。它必须不断抓住点什么——"我是名校毕业的""我是受害者""我是那个说了蠢话的人"——才能在念头之流中维持一个稳定的"我"的感觉。失去认同对象，小我就会感到死亡般的恐慌。</li>
+  <li><strong>它永远不满足</strong>。因为小我是虚构的，它没有真正的根基，所以它对关注、对比较优势、对"更多"有一种结构性的饥渴。小我需要的不是满足，而是<strong>持续地被喂养</strong>。</li>
+</ol>
+
+<h3>2.3 为什么你无法停止思考</h3>
+<blockquote>
+  "思维在本质上是一部求生的机器。"
+  <cite>—— 《当下的力量》第一章</cite>
+</blockquote>
+<p>大脑是演化塑造的求生工具，它的默认设置是扫描威胁、预演风险、反刍损失。在草原上，这套机制救你的命；在 2026 年的深夜，它让你为一条没回复的消息辗转反侧。<strong>工具没有错，错的是它 24 小时不下班</strong>——而它不下班，是因为你认同它：每一次它为想象中的危险拉响警报，你都信以为真，于是警报获得了继续拉响的授权。</p>
+<blockquote>
+  "绝大部分人不具有创造性，不是因为他们不懂得如何去使用思维，而是他们不懂得如何停止思维。"
+  <cite>—— 《当下的力量》第一章</cite>
+</blockquote>
+
+<h3>2.4 观察者：从思维中解放的开始</h3>
+<blockquote>
+  "从思维中解放出来的开始，就是认识到你不是一个思考问题的实体——思考者。"
+  <cite>—— 《当下的力量》第一章</cite>
+</blockquote>
+<p>当你开始"倾听"脑子里的声音——不带评判、不附和、不反驳，只是看着一个念头升起、逗留、消散——一个根本性的位移发生了：<strong>有一个"你"在看思维，那么思维就不可能是全部的"你"</strong>。这个观察者，托利称为"临在"（presence），是通往本体（Being）的门。</p>
+
+<div class="callout warning">
+  <span class="tag">常见误读</span>
+  <p><strong>"不认同思维"就是停止思考、拒绝理性？</strong>恰恰相反。托利从不反对思考——他反对的是<strong>强迫性</strong>思考。思维是一台极好的工具：分析问题、制定计划、沟通协作，都需要它。问题只在于它在该停的时候停不下来。大脑应当"被用来处理特殊任务，任务完成后就处于休止状态"，就像你用完锤子会放下锤子，而不是举着锤子睡觉。</p>
+  <p>同样，"临在"也不等于放空、发呆或昏昏沉沉的走神。临在是一种<strong>高度警觉的宁静</strong>——比思维更清醒，而不是更糊涂。</p>
+</div>
+
+<h3>2.5 欢乐与喜悦的分野</h3>
+<blockquote>
+  "欢乐总是衍生于你之外的事物，而喜悦是由内而生的。"
+  <cite>—— 《当下的力量》第一章</cite>
+</blockquote>
+<p>欢乐（pleasure）依赖外部条件：一顿大餐、一次点赞、一场购物。它转瞬即逝，且会转化为对立面——狂欢后的空虚，刷屏后的自我厌恶。喜悦（joy）不依赖任何外部事物，它是本体状态的副产品。内耗之所以无解，是因为小我只能在"追逐欢乐—承受失落"的钟摆里运动；而观察者所在的位置，恰好在钟摆之外。</p>
+
+<h2>三、一张表：思维认同 × 临在观察</h2>
+<div class="table-box">
+<table>
+  <tr><th>维度</th><th>思维认同（小我状态）</th><th>临在观察（本体状态）</th></tr>
+  <tr><td>自我感来源</td><td>念头、记忆、身份标签、他人评价</td><td>纯粹的觉知本身，无需任何内容支撑</td></tr>
+  <tr><td>与时间的关系</td><td>活在过去的反刍与未来的预演中</td><td>安住在当下，时间只是工具</td></tr>
+  <tr><td>思考方式</td><td>强迫性、重复性、停不下来的"后台运行"</td><td>工具性思考，用完即放，需要时反而更敏锐</td></tr>
+  <tr><td>情绪反应</td><td>情绪即"我"，被情绪完全占据</td><td>看见情绪升起，允许它存在，不被它劫持</td></tr>
+  <tr><td>创造力</td><td>在旧念头的循环里空转</td><td>思维与思维之间的宁静间隙中，新东西涌现</td></tr>
+  <tr><td>对痛苦的关系</td><td>喂养痛苦：痛苦是"我"的证据</td><td>只是看着痛苦，痛苦失去续命的燃料</td></tr>
+  <tr><td>注意力</td><td>被念头随机拽走，事后才发觉</td><td>主动安放，走神即觉察，觉察即回来</td></tr>
+</table>
+</div>
+
+<h2>四、解剖"精神内耗"：小我如何吞噬当代人</h2>
+
+<div class="callout note">
+  <span class="tag">系列定位</span>
+  <p>本篇是本系列的开篇，任务是为整个系列打下概念地基——思维认同、小我、观察者。后续各篇（痛苦之身、心理时间、臣服等）都将从这个地基上生长出来，并不断回到本篇的区分：<strong>你面临的问题，究竟是事实层面的，还是认同层面的。</strong></p>
+</div>
+
+<h3>4.1 刷屏成瘾：用小我喂养小我</h3>
+<p>为什么放下手机那么难？多巴胺解释只说对了一半——它解释了"爽"，解释不了"空虚"。用托利的框架看，信息流是<strong>小我饲料的工业化生产</strong>：热点给愤怒，热搜给焦虑，朋友圈给比较，评论区给争论——愤怒、焦虑、比较、争论，恰好是小我维持自身存在的四种主食。每一条推送都在对小我说："没有你（的意见、你的反应、你的存在），这件事就不完整。"于是你不停地刷，不是因为信息有营养，而是因为<strong>小我害怕安静</strong>：在安静里，它会听见自己虚构的本质。刷屏是逃避临在的最便宜的方式。</p>
+
+<h3>4.2 反刍与深夜 emo：思维在时间中自我复制</h3>
+<p>深夜的精神内耗有一个固定的剧本：过去的一个尴尬场景被调取、重播、逐帧分析，配上一句"如果当时……"。托利会指出：这不是回忆，而是<strong>小我用过去喂养现在</strong>。那个尴尬早已结束，当事人早已忘记，唯一让它活着的是你的重播——而每一次重播，"我是个尴尬的人"这个小我叙事就被加固一层。思维在这里展现出它的自我复制性：<strong>分析痛苦不是在解决痛苦，而是在给痛苦续费</strong>。这就是为什么"想通了就好了"几乎从未兑现——想，恰恰是想不通的原因。（痛苦的这种成瘾性，将在下一篇"痛苦之身"中展开。）</p>
+
+<h3>4.3 社会比较：小我对外部形式的饥渴</h3>
+<p>"同龄人正在抛弃你"——这类内容之所以百发百中，是因为它精准命中了小我的结构性饥渴。小我没有自己的坐标系，它只能通过比较定位自己：比别人好，它短暂膨胀；比别人差，它立刻萎缩。问题在于比较的坐标永远可以上移——升职之后有更高的职级，买房之后有更大的房子。<strong>比较的游戏设计上就没有终点</strong>，因为终点（"我终于足够好了"）意味着小我的退休，而小我绝不退休。</p>
+
+<h3>4.4 "想通了就好了"的骗局：为什么越分析越内耗</h3>
+<p>当代人对内耗的第一反应几乎总是认知性的：找原因、做归因、写复盘、听分析。这些做法在事实层面有效，但在认同层面常常<strong>火上浇油</strong>——因为分析仍然是思维的活动，而问题是思维认同本身。你不可能用思维治好思维的病，就像不可能拽着自己的头发离开地面。托利给出的出口在另一个维度：不是把念头想明白，而是<strong>从念头里抽身出来，看着它</strong>。内耗的终结不是思维内部的和解，而是意识层面的搬迁——从"思维中的我"搬到"看着思维的我"。</p>
+
+<h2>五、超越托利：批判性反思</h2>
+<p>精读不等于照单全收。托利的框架极具穿透力，但若不经过批判性审视，它也会变成新的牢笼。</p>
+<div class="table-box">
+<table>
+  <tr><th>反思维度</th><th>托利框架的风险</th><th>必要的补充</th></tr>
+  <tr><td>内在归因的陷阱</td><td>"痛苦源于你对思维的认同"容易被读成"痛苦都是你自己想出来的"，从而消解对现实问题的正当愤怒</td><td>内耗有真实的结构根源：过劳、不稳定的雇佣、算法设计的成瘾机制。觉察思维<strong>之后</strong>，该改的制度仍要改，该争的权益仍要争</td></tr>
+  <tr><td>正念产业化</td><td>"临在"被包装成付费课程、冥想 App 订阅、企业生产力培训，成为新消费主义的商品</td><td>警惕"灵性商品化"：当觉察被标价出售，购买者消费的往往只是"我在修行"的小我新身份</td></tr>
+  <tr><td>灵性逃避</td><td>"观察情绪"可能沦为绕过问题的技术——不处理关系、不面对冲突，只"觉察"自己的难受</td><td>观察是起点不是终点。临在应当让你<strong>更</strong>有能力行动，而不是成为不行动的优雅借口</td></tr>
+</table>
+</div>
+<p>三点归结成一句话：<strong>托利解决的是"认同"层面的痛苦，它不能也不应被要求解决"事实"层面的痛苦</strong>；反过来，任何事实层面的改善，也替代不了认同层面的工作。两个层面的混淆，无论偏向哪一边，都会让人困在原地。</p>
+
+<h2>六、实践：五个可以立刻做的练习</h2>
+<p>以下练习均出自第一章的方法，按难度递进。共同原则：<strong>不评判、不追求效果、做了就算数</strong>。</p>
+
+<div class="step"><div class="num">1</div>
+  <strong>倾听思维的声音</strong> —— 现在就停下来，注意你脑子里正在说什么。不要附和、不要反驳，只是听，像听窗外的雨声。哪怕只听见了十秒钟——那十秒里，你就是观察者。
+  <div class="concept">对应概念：观察者</div>
+</div>
+<div class="step"><div class="num">2</div>
+  <strong>问："我的下一个念头是什么？"</strong> —— 闭上眼睛，像猫守着老鼠洞一样，警觉地等待下一个念头的出现。大多数人会经历几秒钟到十几秒钟的思维空白——那就是思维之间的宁静，临在的入口。
+  <div class="concept">对应概念：思维间隙</div>
+</div>
+<div class="step"><div class="num">3</div>
+  <strong>给念头贴标签</strong> —— 当一个内耗念头升起（"明天的汇报会搞砸的"），在心里给它贴个标签："思维在预演""小我在害怕"。标签化的动作本身，就是观察者在工作。
+  <div class="concept">对应概念：思维认同的松动</div>
+</div>
+<div class="step"><div class="num">4</div>
+  <strong>单点注意力：一次只做一件事</strong> —— 选一件日常小事——洗手、喝水、走一段路——把注意力完全放在感官细节上：水温、杯子的重量、脚底触地的感觉。念头来了，看见了，回来。每次五分钟。
+  <div class="concept">对应概念：临在</div>
+</div>
+<div class="step"><div class="num">5</div>
+  <strong>睡前"思维盘点"</strong> —— 躺下后，不试图清空大脑（那只会让思维更活跃），改为逐个"签收"念头："哦，明天的事""哦，白天的对话"。签收完，把注意力放到呼吸或身体的感觉上。多数人在十分钟内睡着——不是因为思维停了，而是因为你不再陪它开会。
+  <div class="concept">对应概念：强迫性思考的中断</div>
+</div>
+
+<h2>七、结论</h2>
+
+<h3>核心发现</h3>
+<ol>
+  <li><strong>精神内耗的本质是思维认同</strong>：你不是在思考，而是被思考；内耗不是你"想太多"，而是你无法不想。</li>
+  <li><strong>小我是内耗的发动机</strong>：它靠认同存活、靠喂养维持，刷屏、反刍、比较都是它获取饲料的方式。</li>
+  <li><strong>"想通了就好了"是骗局</strong>：分析痛苦是在给痛苦续费；思维的病不能用思维治。</li>
+  <li><strong>出口在另一个维度</strong>：观察者——那个能听见思维的觉知——才是你更真实的身份；从思维中抽身，不需要思维先同意。</li>
+  <li><strong>批判性边界</strong>：觉察解决认同层面的痛苦，不解决事实层面的痛苦；两者不可互相替代。</li>
+</ol>
+
+<h3>出路</h3>
+<div class="table-box">
+<table>
+  <tr><th>层面</th><th>方向</th></tr>
+  <tr><td>个人</td><td>把"管理念头"换成"观察念头"；每天给自己几分钟不看屏幕、只看思维的安静</td></tr>
+  <tr><td>组织</td><td>警惕把正念变成生产力工具；真正的关怀是减少制造内耗的结构（无意义的汇报、永远在线的文化）</td></tr>
+  <tr><td>产品</td><td>承认信息流产品在设计上是小我饲料厂；作为用户，用觉察重新谈判与设备的关系</td></tr>
+  <tr><td>观念</td><td>把"我必须想明白"松动为"我可以只是看着"；把安静从奢侈品还原为人的默认状态</td></tr>
+</table>
+</div>
+
+<div class="callout tip">
+  <span class="tag">延伸阅读</span>
+  <p>本篇建立的概念地基，将在下一篇<strong>《痛苦之身：深夜 emo 与情绪反刍》</strong>中派上关键用场——为什么有些痛苦不仅挥之不去，反而越品越"上瘾"？托利的答案是：你体内住着一个以痛苦为食的能量场。它与本篇的"小我"是什么关系？敬请期待。</p>
+</div>
+
+<blockquote>
+  "开悟是一个圆满的境界，合一而和平的，与生命以及它所显化的世界合一……开悟的最大障碍，就是认同于你的思维。"
+  <cite>—— 《当下的力量》第一章</cite>
+</blockquote>
+<p>我们不能强迫自己开悟，但可以在任何一个当下，做一个极小的动作：<strong>听见思维，然后知道——听见它的那个，才是你。</strong></p>
+
+<div class="callout tip">
+  <span class="tag">最后的判断</span>
+  <p><strong>内耗不是你的脑子出了问题，而是你把脑子当成了自己。停止修理念头，开始观察念头——这是《当下的力量》给这个时代的第一剂药，也是后面所有篇章的起点。</strong></p>
+</div>
+
+<hr>
+<footer>
+  <p><em>报告生成时间：2026-07-20 ｜ 精读《当下的力量》系列 · 第 01 篇</em></p>
+  <a class="nav-back" href="index.html">← 返回系列首页</a>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  function scatter(id,count){
+    var box=document.getElementById(id);
+    for(var i=0;i<count;i++){
+      var s=document.createElement('i');
+      s.style.left=Math.random()*100+'%';
+      s.style.top=Math.random()*100+'%';
+      s.style.animationDelay=(Math.random()*6)+'s';
+      box.appendChild(s);
+    }
+  }
+  scatter('stars1',50);scatter('stars2',70);scatter('stars3',90);
+})();
+</script>
+
+</body>
+</html>
