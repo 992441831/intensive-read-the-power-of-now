@@ -4,7 +4,8 @@
       "Bash(git -C 'E:/study/idea-code-lib/intensive-read-the-power-of-now' remote -v)",
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(git commit -m '新增第02篇：痛苦之身——深夜 emo 与情绪反刍（禅意水墨风 HTML） *)"
     ]
   }
 }
