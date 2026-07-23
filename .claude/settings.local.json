@@ -7,7 +7,8 @@
       "Bash(git push *)",
       "Bash(git commit -m '新增第02篇：痛苦之身——深夜 emo 与情绪反刍（禅意水墨风 HTML） *)",
       "Bash(git commit -m '新增第03篇：心理时间与钟表时间——deadline 焦虑与\"等以后就好了\"（深夜星空风 HTML，沿用第01篇风格） *)",
-      "Bash(git -c http.proxy=http://127.0.0.1:10808 -c https.proxy=http://127.0.0.1:10808 push)"
+      "Bash(git -c http.proxy=http://127.0.0.1:10808 -c https.proxy=http://127.0.0.1:10808 push)",
+      "Bash(git commit -m '第02篇 HTML 改版：禅意水墨风 → 日出晨光风（用户指定） *)"
     ]
   }
 }
