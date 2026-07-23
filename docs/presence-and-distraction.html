@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>临在 —— 注意力经济时代的走神 ｜ 精读《当下的力量》04</title>
+<style>
+  :root{
+    --night-1:#050818; --night-2:#0b1230; --night-3:#141c44;
+    --star:#e8ecff; --moon:#f4e8c8; --ink:#dfe5f7; --ink-dim:#9aa5cd;
+    --accent:#8fb7ff; --gold:#e8c97a;
+    --card:rgba(20,28,68,.55); --line:rgba(143,183,255,.22);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif;
+    background:linear-gradient(180deg,var(--night-1) 0%,var(--night-2) 45%,var(--night-3) 100%);
+    color:var(--ink); line-height:1.9; overflow-x:hidden;
+  }
+  /* ———— 星空 ———— */
+  .stars,.stars2,.stars3{position:fixed;inset:0;pointer-events:none;z-index:0}
+  .stars i,.stars2 i,.stars3 i{position:absolute;background:var(--star);border-radius:50%;animation:twinkle 3s ease-in-out infinite}
+  @keyframes twinkle{0%,100%{opacity:.15}50%{opacity:.9}}
+  .stars i{width:2px;height:2px}.stars2 i{width:1.5px;height:1.5px;animation-duration:4.5s}
+  .stars3 i{width:1px;height:1px;animation-duration:6s}
+  /* ———— 呼吸月晕 ———— */
+  .breath{
+    position:fixed;top:8%;right:6%;width:220px;height:220px;border-radius:50%;
+    background:radial-gradient(circle,rgba(244,232,200,.35) 0%,rgba(244,232,200,.12) 40%,transparent 70%);
+    animation:breathe 8s ease-in-out infinite;pointer-events:none;z-index:0;
+  }
+  .breath::after{content:"";position:absolute;inset:38%;border-radius:50%;
+    background:radial-gradient(circle,var(--moon) 0%,#e8d8a8 80%);
+    box-shadow:0 0 40px rgba(244,232,200,.5)}
+  @keyframes breathe{0%,100%{transform:scale(1);opacity:.75}50%{transform:scale(1.12);opacity:1}}
+  /* ———— 布局 ———— */
+  .wrap{position:relative;z-index:1;max-width:820px;margin:0 auto;padding:64px 22px 96px}
+  header{text-align:center;padding:56px 0 40px;border-bottom:1px solid var(--line)}
+  .series{letter-spacing:.5em;font-size:12px;color:var(--ink-dim);text-transform:uppercase;margin-bottom:22px}
+  h1{font-size:2.5rem;font-weight:700;letter-spacing:.06em;color:var(--star);
+     text-shadow:0 0 24px rgba(143,183,255,.45)}
+  .subtitle{margin-top:26px;font-size:1.05rem;color:var(--moon);font-style:italic;opacity:.92}
+  .meta{margin-top:20px;font-size:.8rem;color:var(--ink-dim);letter-spacing:.05em}
+  h2{font-size:1.5rem;margin:64px 0 26px;color:var(--star);padding-left:16px;
+     border-left:3px solid var(--accent);letter-spacing:.04em}
+  h3{font-size:1.12rem;margin:38px 0 14px;color:var(--accent)}
+  p{margin:14px 0}
+  strong{color:var(--star)}
+  em{color:var(--moon)}
+  ul,ol{margin:12px 0 12px 24px}
+  li{margin:8px 0}
+  /* ———— 引文 ———— */
+  blockquote{
+    margin:26px 0;padding:22px 26px;position:relative;
+    background:rgba(232,201,122,.06);border:1px solid rgba(232,201,122,.25);
+    border-radius:10px;font-style:italic;color:var(--moon);
+  }
+  blockquote::before{content:"“";position:absolute;top:-18px;left:14px;font-size:56px;
+    color:var(--gold);opacity:.55;font-family:Georgia,serif}
+  blockquote cite{display:block;margin-top:10px;font-style:normal;font-size:.82rem;color:var(--ink-dim)}
+  /* ———— 提示框 ———— */
+  .callout{margin:26px 0;padding:18px 22px;border-radius:10px;background:var(--card);
+    border:1px solid var(--line);backdrop-filter:blur(4px)}
+  .callout .tag{display:inline-block;font-size:.72rem;letter-spacing:.18em;padding:2px 12px;
+    border-radius:999px;margin-bottom:10px;font-weight:600}
+  .callout.note{border-color:rgba(143,183,255,.45)} .callout.note .tag{background:rgba(143,183,255,.18);color:var(--accent)}
+  .callout.important{border-color:rgba(232,201,122,.45)} .callout.important .tag{background:rgba(232,201,122,.16);color:var(--gold)}
+  .callout.warning{border-color:rgba(255,140,140,.45)} .callout.warning .tag{background:rgba(255,140,140,.14);color:#ff9c9c}
+  .callout.tip{border-color:rgba(140,230,190,.4)} .callout.tip .tag{background:rgba(140,230,190,.14);color:#8ce6be}
+  /* ———— 表格 ———— */
+  .table-box{overflow-x:auto;margin:26px 0;border-radius:10px;border:1px solid var(--line)}
+  table{width:100%;border-collapse:collapse;font-size:.92rem;background:var(--card)}
+  th{background:rgba(143,183,255,.12);color:var(--star);padding:13px 16px;text-align:left;
+     border-bottom:1px solid var(--line);white-space:nowrap}
+  td{padding:12px 16px;border-bottom:1px solid rgba(143,183,255,.1);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  td:first-child{font-weight:700;color:var(--accent);white-space:nowrap}
+  /* ———— 练习步骤 ———— */
+  .step{margin:18px 0;padding:18px 20px;border:1px solid var(--line);border-radius:10px;
+    background:var(--card);position:relative;padding-left:70px}
+  .step .num{position:absolute;left:18px;top:18px;width:34px;height:34px;border-radius:50%;
+    border:1px solid var(--accent);color:var(--accent);display:flex;align-items:center;
+    justify-content:center;font-weight:700;font-size:.95rem}
+  .step .concept{font-size:.75rem;color:var(--ink-dim);letter-spacing:.08em;margin-top:6px}
+  hr{border:none;height:1px;background:var(--line);margin:56px 0}
+  footer{text-align:center;color:var(--ink-dim);font-size:.8rem;margin-top:24px}
+  footer a{color:var(--accent);text-decoration:none}
+  .nav-back{display:inline-block;margin-top:30px;color:var(--accent);text-decoration:none;
+    border:1px solid var(--line);padding:8px 22px;border-radius:999px;font-size:.85rem;
+    transition:background .3s}
+  .nav-back:hover{background:rgba(143,183,255,.12)}
+  @media (max-width:640px){
+    h1{font-size:1.8rem}
+    h2{font-size:1.25rem}
+    .breath{width:130px;height:130px;top:5%;right:4%}
+    .wrap{padding:40px 16px 72px}
+  }
+</style>
+</head>
+<body>
+
+<div class="stars" id="stars1"></div>
+<div class="stars2" id="stars2"></div>
+<div class="stars3" id="stars3"></div>
+<div class="breath"></div>
+
+<div class="wrap">
+
+<header>
+  <div class="series">精读《当下的力量》 · 第 04 篇</div>
+  <h1>👁 临在</h1>
+  <div class="subtitle">注意力经济时代的走神</div>
+  <blockquote style="max-width:560px;margin:30px auto 0;text-align:left">
+    "请充分地利用你的感官。定静在原处，环顾四周，但只是看就好，不要去做任何的分析与解释。观察一些光线、形状、颜色、质感等。关注每个东西宁静的临在，关注那个容许所有事物存在的空间。"
+    <cite>—— 埃克哈特·托利《当下的力量》</cite>
+  </blockquote>
+  <div class="meta">文本依据：《当下的力量》（曹植译，中信出版社）第四章「思维逃避当下的策略」（兼及第五章「临在状态」） ｜ 2026-07-23</div>
+</header>
+
+<div class="callout note">
+  <span class="tag">核心论点</span>
+  <p>专注五分钟就走神、看视频还要同时刷手机、排队三十秒必须掏出来看一眼——主流话语把这诊断为"注意力缺陷"或"多巴胺成瘾"，托利的诊断更深一层：<strong>走神不是注意力的故障，而是"普通无意识"的默认状态；你的每一次走神，都是思维在逃避当下</strong>。而注意力经济的整个商业模式，恰恰建立在你"不在场"之上——平台收割的不是你的注意力，而是你离开当下的那些时刻。前三篇的每一个练习——观察念头、见证情绪、撤出心理时间——其实都在练同一门内功：<strong>临在</strong>（presence）。临在不是放松，不是放空，而是一种"高度警觉的宁静"，是这个被设计来让你永远走神的时代里，唯一无法被收割的注意力。</p>
+</div>
+
+<h2>一、引言：一个连无聊都被消灭的时代</h2>
+
+<p>2026 年，注意力的碎片化已经碎到了难以察觉的程度：</p>
+<ul>
+  <li>专注工作五分钟，手就不由自主摸向手机——没有任何通知，只是想"看一眼"；</li>
+  <li>看着视频还要刷手机，"双屏"成为客厅标配：一块屏幕已经填不满"不在场"的冲动；</li>
+  <li>排队、等电梯、红灯变绿前的三十秒，都要被信息流填满——无聊成了必须立刻消灭的故障；</li>
+  <li>哈佛一项经典研究（Killingsworth &amp; Gilbert, 2010）通过 iPhone 随机抽查发现：人们 <strong>46.9% 的清醒时间都在走神</strong>——想的不是手头正在做的事；而且走神的时候，比专注当下时<strong>更不快乐</strong>。</li>
+</ul>
+<p>主流自救方案有两套：一是归因于个人——"你意志力不够"，于是自律、打卡、种树；二是归因于化学——"你多巴胺成瘾"，于是数字戒断、灰度屏、卸载 App。</p>
+
+<div class="callout important">
+  <span class="tag">问题的提出</span>
+  <p>这两套方案共享一个盲区——它们都把走神当成<strong>注意力管理的技术问题</strong>，好像注意力是一台性能下降的发动机，加点自律的机油就能修好。托利在第四章直接换了个问题：<strong>你的注意力为什么会"想"离开当下？</strong>他的回答：因为在默认状态下，你根本"不在"当下——你在思维里。他把这个默认状态称为"普通无意识"：不是昏迷，而是一种醒着的缺席——人在此处，自我在念头、情绪、反应、欲望的洪流里随波逐流。走神不是偶发的故障，而是这个默认状态的正常运转。<strong>手机只是来接盘的，不是你缺席的原因，而是你缺席的证明。</strong></p>
+</div>
+
+<h2>二、概念基石：普通无意识 × 临在</h2>
+
+<h3>2.1 普通无意识：醒着的缺席</h3>
+<blockquote>
+  在普通的无意识状态中，"你认同于你的思考过程、情绪、反应、欲望和好恶。这是大部分人所处的正常状态。……它不是一个剧变的、明显不正常的状态，而是一种根深蒂固的、不引人注意的背景状态。"
+  <cite>—— 《当下的力量》第四章（大意）</cite>
+</blockquote>
+<p>注意这个定义的反讽：<strong>普通无意识之所以难以察觉，恰恰因为它太"正常"了</strong>。它不制造戏剧性的痛苦，只制造一种背景性的不满足——一种说不清道不明的"不在这里"的感觉。于是人要不断找东西填满它：刷一下、看一眼、点开一个。每一次填充都是一次微型的走神，而填充物的供应商，正是整个注意力经济。</p>
+<p>第 01 篇讲过"思维的病不能用思维治"；本篇补上半句：<strong>走神的病也不能用"管住自己"治</strong>——因为想管住走神的那个"你"，和正在走神的那个"你"，在普通无意识里是同一个。</p>
+
+<h3>2.2 临在：观察者的稳定态</h3>
+<p>临在是什么？第 01 篇我们建立了"观察者"——那个能听见思维的觉知。但观察者在初学者那里只是<strong>瞬间</strong>：听见念头十秒，然后又被卷走十分钟。托利说的临在，就是这个瞬间的<strong>稳定化</strong>：</p>
+<blockquote>
+  临在，是有觉察力地安住于当下。所谓觉察力，就是观察自己脑袋里思维的能力，做自己喋喋不休的思想的观察者。
+  <cite>—— 《当下的力量》第五章（大意）</cite>
+</blockquote>
+<p>从观察者到临在，是从"动作"到"状态"的跨越：观察者是"此刻我在看"，临在是"看成了我的存在方式"。本篇最关心的实用问题是：这个状态怎么检验？托利给了一个朴素到令人意外的标准：</p>
+<blockquote>
+  "衡量你练习临在是否成功的标准是：你内在感觉平和的程度。"
+  <cite>—— 《当下的力量》第四章</cite>
+</blockquote>
+<p>不是专注力时长，不是冥想打卡天数，而是<strong>平和</strong>——一种背景性的、不需要任何理由的安稳。这个标准本身就内嵌着对注意力经济的批判：平台衡量成功的标准是停留时长，而临在衡量成功的标准是平和——<strong>两个指标方向相反</strong>。</p>
+
+<h3>2.3 思维逃避当下的策略：走神即逃避</h3>
+<p>第四章的标题直译为"思维逃避当下的策略"——托利认为，思维对当下有一种结构性的逃避冲动。为什么？因为前三篇已经给出了答案：</p>
+<ul>
+  <li>小我靠心理时间续命，纯粹的当下里没有它的抓手（呼应第 01、03 篇）；</li>
+  <li>痛苦之身靠过去与未来进食，当下这张餐桌上没有它的位置（呼应第 02 篇）；</li>
+  <li>所以<strong>每一次走神，无论多么微不足道，都是这台系统在把你从"它没有存身之处"的地方拖走</strong>。</li>
+</ul>
+<p>这就是为什么走神有"引力"：不是你懒，是你体内有一个庞大的联合企业（小我＋痛苦之身＋心理时间）在持续做空"当下"。而临在，就是撤销这笔做空。</p>
+
+<h3>2.4 进入临在的门：感官与内在</h3>
+<blockquote>
+  "无论你身处何地，请全然地安于当下。……将你的注意力导向当下，对你的思维、情绪和身体反应保持警觉。"
+  <cite>—— 《当下的力量》第四章</cite>
+</blockquote>
+<p>感官是最短的路径：看，只是看；听，只是听。因为感官<strong>只能在当下工作</strong>——你无法看见昨天的光，无法听见明天的声音。注意力一旦完全交给感官，思维就被迫让位：这就是"思维与思维之间的宁静间隙"（呼应第 01 篇）在日常生活中最常出现的时刻。</p>
+
+<div class="callout warning">
+  <span class="tag">常见误读</span>
+  <p><strong>误读一：临在就是放松、发呆、放空。</strong>恰恰相反。发呆是普通无意识的另一种形式——注意力涣散了，而不是收回了。托利形容临在是"高度警觉的宁静"：像猫守在鼠洞前，一动不动，但全部的觉知都醒着。放松可以伴随临在，但瘫软不是临在。</p>
+  <p><strong>误读二：临在是一种神秘的"境界"，需要多年修行才能碰到。</strong>恰恰相反。临在是每个人每天都在经历的状态——被夕阳击中的一瞬间、投入忘我的一段工作、危机中异乎寻常的冷静——只是它通常不被认出、不被命名，所以无法被延长。练习的全部内容，就是把"偶然路过"变成"常住"。</p>
+  <p><strong>误读三：临在就是不走神。</strong>这个误读会直接把练习变成新的内耗——"我怎么又走神了，我真失败"。托利的原话恰好相反："当你意识到你没有活在当下的那一刻，你就活在当下了。"<strong>发现走神的那个瞬间，本身就是临在。</strong>练习不是不走神，而是越来越快地"发现"——走神一百次，回来一百零一次，就是胜利。</p>
+</div>
+
+<h2>三、一张表：普通无意识 × 临在</h2>
+<div class="table-box">
+<table>
+  <tr><th>维度</th><th>普通无意识（醒着的缺席）</th><th>临在（全然在场）</th></tr>
+  <tr><td>注意力归属</td><td>在念头、情绪、信息流里漂流</td><td>主动安放在感官与当下事务上</td></tr>
+  <tr><td>自我感</td><td>靠内容维持：消息、点赞、进展、"我在想"</td><td>觉知本身就是"在"，无需内容证明</td></tr>
+  <tr><td>对刺激的反应</td><td>通知即查看，冲动即行动，无间隙</td><td>刺激与反应之间有觉察的空间</td></tr>
+  <tr><td>情绪底色</td><td>背景性的不满足、焦躁、"不在这里"</td><td>不需要理由的平和</td></tr>
+  <tr><td>与手机的关系</td><td>手比意识快：无意识解锁、无意识刷新</td><td>每一次拿起都有明确意图，用完即放</td></tr>
+  <tr><td>无聊</td><td>必须立刻消灭的故障</td><td>觉察的入口：无聊感的升起与消退都值得一看</td></tr>
+  <tr><td>走神</td><td>46.9% 的常态，且事后才发觉（或不发觉）</td><td>仍会走神，但"发现"的速度越来越快</td></tr>
+  <tr><td>衡量指标</td><td>平台：停留时长；自己：刷了多少</td><td>托利：内在平和的程度</td></tr>
+</table>
+</div>
+
+<h2>四、解剖"走神"：普通无意识的工业化放大</h2>
+
+<div class="callout note">
+  <span class="tag">系列定位</span>
+  <p>第 01 篇建立了观察者（觉察的<strong>瞬间</strong>）；第 02 篇把观察对象扩展到情绪能量（觉察的<strong>对象</strong>）；第 03 篇撤出了心理时间（觉察的<strong>坐标系</strong>）。本篇完成最后一块拼图：把瞬间的觉察扩展为稳定的状态——<strong>临在是前三篇所有"小动作"共同指向的内功</strong>。反过来，走神则是这个时代的"普通无意识"被工业化放大后的形态：小我想要饲料、痛苦之身想要食物、心理时间想要通道，而平台恰好把这三样打包成了一条无限供给的流水线。</p>
+</div>
+
+<h3>4.1 走神的科学：46.9% 与"不快乐的漫游者"</h3>
+<p>先给托利配一组科学证据。走神（mind wandering）在认知科学里对应"默认模式网络"（DMN）的激活——当你不专注于外部任务时，大脑自动转入自我参照加工：回忆、预演、自传体叙事。Killingsworth 与 Gilbert 的研究（2010，样本 2250 人，随机时刻抽查）得出两个结论：其一，人们近一半的清醒时间在走神；其二，<strong>走神时比专注时更不快乐——无论走神的内容多么愉快</strong>。</p>
+<p>第二个结论与托利惊人地一致：痛苦不取决于念头的内容，而取决于"不在当下"本身。但科学能测量"在想什么"，测不出"知不知道自己在想"——后者正是临在的维度。冥想研究的后续发现补上了这一环：有经验的禅修者 DMN 活动更低，且"发现走神"的神经响应更快。用托利的语言说：<strong>练习没有改变你走神的天性，改变的是你与走神的关系</strong>。</p>
+
+<h3>4.2 注意力经济：收割你的"不在场"</h3>
+<p>理解了普通无意识，就看懂了注意力经济的商业模式：平台表面在争夺你的注意力，实质在<strong>经营你的缺席</strong>。每一个设计都精准地对接普通无意识的弱点：</p>
+<ul>
+  <li><strong>可变比率奖励</strong>（下拉刷新不知道会出现什么）——对接小我对"更多"的结构性饥渴（呼应第 01 篇：信息流是小我饲料厂）；</li>
+  <li><strong>无限滚动</strong>——取消一切"完成点"，让心理时间的"下一个"永无尽头（呼应第 03 篇："以后"永不抵达）；</li>
+  <li><strong>推送打断</strong>——外部化地模拟思维走神，把你的"发现速度"拖慢到永远追不上打断速度；</li>
+  <li><strong>自动播放</strong>——消灭每一个"现在可以放下了"的决策瞬间，也就是消灭每一个临在可能发生的空间。</li>
+</ul>
+<p>请注意这套系统的闭环：<strong>它先制造你的不在场，再贩卖缓解不在场之苦的内容</strong>。你在深夜里越空虚，凌晨的直播间越热闹。所以从商业逻辑上说，临在是平台的天敌——一个全然在场的人是不可收割的：他看视频就是看完了，买东西就是买完了，他不会在"无意识的一小时"里贡献任何停留时长。</p>
+
+<h3>4.3 双屏现象：一个屏幕填不满的缺席</h3>
+<p>为什么看着电视还要刷手机？为什么听播客要同时打游戏？双屏是这个时代最诚实的无意识标本：<strong>一块屏幕提供的刺激量，已经不足以压住"回到当下"的不安</strong>。</p>
+<p>用托利的框架看，第二块屏幕不是"娱乐升级"，而是逃避升级——当第一个刺激源出现任何空隙（广告、缓冲、情节平缓），当下就可能露出头角，而普通无意识绝不允许那个空隙存在。于是用第二个刺激源填满第一个的缝隙。这不是放松，而是<strong>对"与自己独处"的预防性封锁</strong>。讽刺的是，双屏用户事后常常报告"什么都没看进去"——当然，因为观看者始终不在场。</p>
+
+<h3>4.4 无聊恐惧：被消灭的入口</h3>
+<p>排队、等红灯、水开前的两分钟——这些缝隙曾经是临在的天然练习场，如今被手机全数填平。托利会说：这不是效率，这是<strong>对无聊的病理化恐惧</strong>。而无聊在临在的视角里完全不是故障：它是思维找不到饲料时的戒断反应，是"普通无意识"最薄弱的时刻——也正是最容易被"看见"的时刻。</p>
+<p>第 03 篇的"等待练习"在这里升级：等待时观察的不只是呼吸和身体，还可以直接观察"无聊"本身——它长在身体的哪个部位？它以多快的速度升级为掏手机的冲动？冲动升起后如果不满足，它是会消散还是会爆炸？你会亲眼发现：<strong>无聊被看着的时候，撑不过九十秒</strong>。而九十秒之后浮上来的东西，往往比下一条短视频有意思得多。</p>
+
+<h2>五、超越托利：批判性反思</h2>
+<p>临在是全书的心脏，也因此最需要防止被滥用。三条边界：</p>
+<div class="table-box">
+<table>
+  <tr><th>反思维度</th><th>风险</th><th>必要的补充</th></tr>
+  <tr><td>走神是被设计的</td><td>"你走神是因为你不在场"可能成为平台责任的漂白剂——把系统性设计问题内化为个人修行不够</td><td>知识诚实要求我们同时说两句话：临在确实是个体能收回的主权；<strong>但注意力是被价值数千亿美元的工程团队系统性劫持的</strong>，个体的临在练习必须与设计伦理、平台监管、未成年人保护并行。觉察治"认同"的病，治不了"结构"的病</td></tr>
+  <tr><td>临在的生产力化</td><td>企业把正念课程引入 KPI 体系：练习临在，是为了更高产出、更强抗压——临在被回收为效率工具</td><td>警惕指标置换：托利给出的唯一标准是"平和的程度"，而不是"专注的产出"。当临在被用来让人更能忍受不合理的制度时，它就变成了"灵性逃避"的企业版——<strong>让系统的不公更可被忍受，不是觉醒，是麻醉</strong></td></tr>
+  <tr><td>走神的正当价值</td><td>"全然临在"被读成对走神的全盘否定，会使人敌视自己心智的正常功能</td><td>科学证据很清楚：默认模式网络参与创造力孵化、自传体记忆整合、对他人心理的模拟——<strong>走神是心智的必备功能，不是纯粹的病理</strong>。托利批判的从来不是走神本身，而是"强迫性的、不自知的"走神。一个健康的心智是"走神得起，也回得来"——钥匙在"回得来"</td></tr>
+</table>
+</div>
+<p>一句话归结：<strong>临在不是注意力管理的更优技术，而是对"注意力该归谁所有"的重新确权</strong>——确权之后，走神可以是休息，刷屏可以是娱乐，前提是：你知道自己在做什么。</p>
+
+<h2>六、实践：五个可以立刻做的练习</h2>
+<p>以下练习对应第四、五章的方法，是前三篇练习的"收束版"——它们训练的是同一个动作在不同场景的迁移。共同原则：<strong>不评判、不追求效果、做了就算数</strong>。</p>
+
+<div class="step"><div class="num">1</div>
+  <strong>感官落地三件套</strong> —— 任何察觉到自己"飘了"的时刻，依次完成三个动作：说出眼前<strong>看到</strong>的一样东西（不看手机，看真实的空间）、听到的一种声音、身体接触到的一种触感（椅背、鞋底、衣料）。三十秒完成一轮。这是托利"充分利用你的感官"的最小化版本——感官只能在当下工作，注意力交给感官，思维自动让位。
+  <div class="concept">对应概念：感官是进入当下的门</div>
+</div>
+<div class="step"><div class="num">2</div>
+  <strong>"我的内在现在怎么回事"</strong> —— 每天设三个随机闹钟（不要让它们可预测），铃响时问自己托利建议的那句话："此刻我很自在吗？我的内在现在怎么回事？"然后花十秒钟如实观察：身体哪里紧？情绪是什么色调？念头在跑哪条线？不修正、不评价，只记录。这个练习把临在从"练习时间"渗透进"全天"。
+  <div class="concept">对应概念：自我观察的习惯（第五章）</div>
+</div>
+<div class="step"><div class="num">3</div>
+  <strong>走神标记法</strong> —— 工作或阅读时，每当发现自己走神，不批评自己，只在心里轻轻标记一个字："走。"然后回来。关键心态：发现走神的那一刻<strong>不是失败的时刻，而是练习成功的时刻</strong>——"当你意识到你没有活在当下的那一刻，你就活在当下了"。一天标记五十次，胜过一次都不标记的"假装专注"。
+  <div class="concept">对应概念：发现走神即临在</div>
+</div>
+<div class="step"><div class="num">4</div>
+  <strong>给临在留出可守的边界</strong> —— 这一条不来自托利，来自对注意力经济的清醒认识：既然对手是数千亿美元的工程团队，就不要赤手空拳上阵。关掉非必要推送、给最容易失控的 App 设时限、睡前一小时手机不进卧室。<strong>这不是临在的替代品，而是临在的护城河</strong>——先用环境设计减少对手，再用觉察处理剩下的部分。
+  <div class="concept">对应概念：批判性反思的诚实补充</div>
+</div>
+<div class="step"><div class="num">5</div>
+  <strong>无聊驻留</strong> —— 每天选一次天然的缝隙——排队、等水开、等红灯——刻意不掏手机，只是待着，观察"无聊感"的升起、升级、以及（如果你一直看着它）它的自行消散。全程不需要超过两分钟。这个练习直接操练本篇的核心论点：无聊被见证的时候撑不过九十秒，而九十秒之后的你，比刷完九十秒短视频的你，更"在"。
+  <div class="concept">对应概念：无聊是入口</div>
+</div>
+
+<h2>七、结论</h2>
+
+<h3>核心发现</h3>
+<ol>
+  <li><strong>走神是普通无意识的默认运转，不是注意力故障</strong>：46.9% 的清醒时间在走神、且走神时更不快乐——科学与托利在此会师：痛苦不取决于念头内容，而取决于"不在当下"本身。</li>
+  <li><strong>注意力经济收割的不是注意力，而是缺席</strong>：平台的每个设计都精准对接小我、痛苦之身、心理时间的弱点；一个全然在场的人在商业逻辑上不可收割。</li>
+  <li><strong>临在是前三篇的共同内功</strong>：观察念头、见证情绪、撤出心理时间，都是同一个动作的不同切面——把注意力收回当下，并让"收回"从瞬间变成状态。</li>
+  <li><strong>发现走神就是临在</strong>：练习的目标不是不走神，而是"发现"的速度；走神一百次、回来一百零一次，就是胜利。</li>
+  <li><strong>概念边界</strong>：走神有被设计的结构性成因，也有创造力等正当价值；临在确权的对象是"不自知的强迫性走神"，不是走神本身，更不替代对平台的制度性约束。</li>
+</ol>
+
+<h3>出路</h3>
+<div class="table-box">
+<table>
+  <tr><th>层面</th><th>方向</th></tr>
+  <tr><td>个人</td><td>用感官三件套随时落地；用随机内检把临在渗进全天；用"走"字标记法与走神重建关系</td></tr>
+  <tr><td>设备</td><td>先修护城河（关推送、设时限、手机不进卧室），再谈觉察——不与千亿工程团队赤手搏斗</td></tr>
+  <tr><td>组织</td><td>警惕把正念变成"让不合理更可忍受"的麻醉剂；衡量员工状态用"平和"而非"抗压产出"</td></tr>
+  <tr><td>观念</td><td>把"我怎么又走神了"改写为"我又发现了一次"；把无聊从故障改写为入口；把专注从道德义务改写为"知道自己在哪里"</td></tr>
+</table>
+</div>
+
+<div class="callout tip">
+  <span class="tag">延伸阅读</span>
+  <p>临在还有一个更深的入口，它比感官更近、比呼吸更稳——<strong>你的身体内部</strong>。托利称之为"内在身体"：当你能觉察到双手内在的能量场、身体深处的生命感时，思维几乎无法劫持你。下一篇<strong>《内在身体：用身体锚定当下》</strong>（第六章），我们从"注意力收回当下"走向"觉察沉入身体"——那是临在最坚固的锚点。</p>
+</div>
+
+<blockquote>
+  "当你意识到你没有活在当下的那一刻，你就活在当下了。"
+  <cite>—— 《当下的力量》第四章</cite>
+</blockquote>
+<p>我们无法让这个时代的屏幕暗下来，但可以在每一次"又走神了"的懊恼升起的瞬间，认出那个懊恼背后的真相：<strong>你能发现自己走神，恰恰说明"你"一直都在场——只是刚刚才回头看见。</strong></p>
+
+<div class="callout tip">
+  <span class="tag">最后的判断</span>
+  <p><strong>这个时代最贵的不是注意力，而是"知道注意力在哪里"。走神不可耻，不自知才可被收割。临在不要求你对抗洪流，只要求你在每一次被冲走之后回头——而回头的那一眼，就是整个练习的全部，也是平台永远算不进留存时长的东西。</strong></p>
+</div>
+
+<hr>
+<footer>
+  <p><em>报告生成时间：2026-07-23 ｜ 精读《当下的力量》系列 · 第 04 篇</em></p>
+  <p style="margin-top:14px"><a href="psychological-time.html">← 上一篇：心理时间</a></p>
+  <a class="nav-back" href="index.html">← 返回系列首页</a>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  function scatter(id,count){
+    var box=document.getElementById(id);
+    for(var i=0;i<count;i++){
+      var s=document.createElement('i');
+      s.style.left=Math.random()*100+'%';
+      s.style.top=Math.random()*100+'%';
+      s.style.animationDelay=(Math.random()*6)+'s';
+      box.appendChild(s);
+    }
+  }
+  scatter('stars1',50);scatter('stars2',70);scatter('stars3',90);
+})();
+</script>
+
+</body>
+</html>
