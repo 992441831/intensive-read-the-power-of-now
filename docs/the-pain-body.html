@@ -6,146 +6,121 @@
 <title>痛苦之身 —— 深夜 emo 与情绪反刍 ｜ 精读《当下的力量》02</title>
 <style>
   :root{
-    --cream:#fff8ee; --peach:#fde9d4; --sky:#e3edf7;
-    --sun:#ffab4a; --sun-deep:#f07f2e; --gold:#e8955a;
-    --ink:#4a3f35; --ink-soft:#6f6154; --ink-faint:#a3907d;
-    --accent:#e2762d; --morning-blue:#5a7ba6;
-    --card:rgba(255,252,246,.72); --line:rgba(226,149,90,.28);
+    --night-1:#050818; --night-2:#0b1230; --night-3:#141c44;
+    --star:#e8ecff; --moon:#f4e8c8; --ink:#dfe5f7; --ink-dim:#9aa5cd;
+    --accent:#8fb7ff; --gold:#e8c97a;
+    --card:rgba(20,28,68,.55); --line:rgba(143,183,255,.22);
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{
-    font-family:"Noto Serif SC","Songti SC","SimSun","STSong",serif;
-    background:linear-gradient(180deg,#dfe9f5 0%,#f3e4d3 30%,var(--peach) 62%,var(--cream) 100%);
-    color:var(--ink);line-height:2;overflow-x:hidden;
+    font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif;
+    background:linear-gradient(180deg,var(--night-1) 0%,var(--night-2) 45%,var(--night-3) 100%);
+    color:var(--ink); line-height:1.9; overflow-x:hidden;
   }
-  /* ———— 晨光太阳 ———— */
-  .sun-wrap{position:fixed;top:5%;right:8%;width:230px;height:230px;pointer-events:none;z-index:0}
-  .sun{position:absolute;inset:26%;border-radius:50%;
-    background:radial-gradient(circle,#fff3d6 0%,var(--sun) 55%,var(--sun-deep) 100%);
-    box-shadow:0 0 60px rgba(255,171,74,.55),0 0 140px rgba(255,171,74,.3);
-    animation:sunbreathe 9s ease-in-out infinite}
-  @keyframes sunbreathe{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.07);opacity:1}}
-  .rays{position:absolute;inset:-22%;border-radius:50%;opacity:.5;
-    background:repeating-conic-gradient(from 0deg,rgba(255,190,110,.35) 0deg 4deg,transparent 4deg 24deg);
-    -webkit-mask-image:radial-gradient(circle,transparent 26%,#000 30%,transparent 68%);
-    mask-image:radial-gradient(circle,transparent 26%,#000 30%,transparent 68%);
-    animation:spin 60s linear infinite}
-  @keyframes spin{to{transform:rotate(360deg)}}
-  /* ———— 晨雾 ———— */
-  .mist{position:fixed;left:0;right:0;pointer-events:none;z-index:0;
-    background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);
-    filter:blur(30px);animation:drift 26s ease-in-out infinite alternate}
-  @keyframes drift{from{transform:translateX(-6%)}to{transform:translateX(6%)}}
+  /* ———— 星空 ———— */
+  .stars,.stars2,.stars3{position:fixed;inset:0;pointer-events:none;z-index:0}
+  .stars i,.stars2 i,.stars3 i{position:absolute;background:var(--star);border-radius:50%;animation:twinkle 3s ease-in-out infinite}
+  @keyframes twinkle{0%,100%{opacity:.15}50%{opacity:.9}}
+  .stars i{width:2px;height:2px}.stars2 i{width:1.5px;height:1.5px;animation-duration:4.5s}
+  .stars3 i{width:1px;height:1px;animation-duration:6s}
+  /* ———— 呼吸月晕 ———— */
+  .breath{
+    position:fixed;top:8%;right:6%;width:220px;height:220px;border-radius:50%;
+    background:radial-gradient(circle,rgba(244,232,200,.35) 0%,rgba(244,232,200,.12) 40%,transparent 70%);
+    animation:breathe 8s ease-in-out infinite;pointer-events:none;z-index:0;
+  }
+  .breath::after{content:"";position:absolute;inset:38%;border-radius:50%;
+    background:radial-gradient(circle,var(--moon) 0%,#e8d8a8 80%);
+    box-shadow:0 0 40px rgba(244,232,200,.5)}
+  @keyframes breathe{0%,100%{transform:scale(1);opacity:.75}50%{transform:scale(1.12);opacity:1}}
   /* ———— 布局 ———— */
-  .wrap{position:relative;z-index:1;max-width:820px;margin:0 auto;padding:72px 24px 100px}
-
-  header{text-align:center;margin-bottom:56px}
-  .series{font-size:.78rem;letter-spacing:.55em;color:var(--ink-faint);margin-bottom:26px}
-  h1{font-size:2.5rem;font-weight:700;letter-spacing:.12em;color:var(--ink)}
-  h1 .accent{color:var(--accent)}
-  .subtitle{font-size:1.05rem;color:var(--ink-soft);margin-top:10px;letter-spacing:.18em}
-  .dawn-mark{display:inline-block;margin-top:26px;padding:6px 16px;font-size:.85rem;
-    letter-spacing:.35em;color:#fff;border-radius:999px;
-    background:linear-gradient(90deg,var(--morning-blue),var(--sun-deep));
-    box-shadow:0 3px 14px rgba(240,127,46,.35)}
-  .meta{margin-top:26px;font-size:.8rem;color:var(--ink-faint);letter-spacing:.06em}
-
-  /* 引文：左侧晨光 */
-  .brush-quote{position:relative;margin:44px 0;padding:8px 0 8px 34px;font-size:1.02rem;
-    color:var(--ink-soft);font-style:italic}
-  .brush-quote::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;
-    background:linear-gradient(180deg,transparent 0%,var(--sun) 12%,var(--sun-deep) 82%,transparent 100%);
-    border-radius:3px;opacity:.85}
-  .brush-quote cite{display:block;margin-top:8px;font-style:normal;font-size:.82rem;color:var(--ink-faint)}
-
-  h2{font-size:1.55rem;margin:64px 0 26px;letter-spacing:.1em;color:var(--ink);
-    display:flex;align-items:center;gap:14px}
-  h2::before{content:"";width:34px;height:2px;
-    background:linear-gradient(90deg,var(--morning-blue),var(--sun-deep));opacity:.9}
-  h3{font-size:1.15rem;margin:38px 0 16px;color:var(--morning-blue);letter-spacing:.06em}
-  p{margin-bottom:18px;text-align:justify}
-  strong{color:var(--ink)}
-  em{color:var(--sun-deep);font-style:normal;border-bottom:1px dotted var(--sun-deep)}
-
-  /* 提示框 */
-  .callout{margin:30px 0;padding:20px 24px;border:1px solid var(--line);
-    background:var(--card);border-radius:10px;position:relative;
-    box-shadow:0 4px 18px rgba(226,118,45,.06)}
-  .callout::before{content:attr(data-label);position:absolute;top:-11px;left:18px;
-    padding:1px 12px;font-size:.72rem;letter-spacing:.25em;border-radius:999px;background:var(--cream)}
-  .callout.note::before{color:var(--morning-blue);border:1px solid var(--morning-blue)}
-  .callout.important::before{color:var(--accent);border:1px solid var(--accent)}
-  .callout.warning::before{color:#a3721b;border:1px solid #c9a03c}
-  .callout.tip::before{color:#4a7a52;border:1px solid #6fa877}
-  .callout p:last-child{margin-bottom:0}
-
-  /* 表格 */
-  .table-box{overflow-x:auto;margin:28px 0;border-radius:10px;border:1px solid var(--line);
-    box-shadow:0 4px 18px rgba(226,118,45,.06)}
+  .wrap{position:relative;z-index:1;max-width:820px;margin:0 auto;padding:64px 22px 96px}
+  header{text-align:center;padding:56px 0 40px;border-bottom:1px solid var(--line)}
+  .series{letter-spacing:.5em;font-size:12px;color:var(--ink-dim);text-transform:uppercase;margin-bottom:22px}
+  h1{font-size:2.5rem;font-weight:700;letter-spacing:.06em;color:var(--star);
+     text-shadow:0 0 24px rgba(143,183,255,.45)}
+  .subtitle{margin-top:26px;font-size:1.05rem;color:var(--moon);font-style:italic;opacity:.92}
+  .meta{margin-top:20px;font-size:.8rem;color:var(--ink-dim);letter-spacing:.05em}
+  h2{font-size:1.5rem;margin:64px 0 26px;color:var(--star);padding-left:16px;
+     border-left:3px solid var(--accent);letter-spacing:.04em}
+  h3{font-size:1.12rem;margin:38px 0 14px;color:var(--accent)}
+  p{margin:14px 0}
+  strong{color:var(--star)}
+  em{color:var(--moon)}
+  ul,ol{margin:12px 0 12px 24px}
+  li{margin:8px 0}
+  /* ———— 引文 ———— */
+  blockquote{
+    margin:26px 0;padding:22px 26px;position:relative;
+    background:rgba(232,201,122,.06);border:1px solid rgba(232,201,122,.25);
+    border-radius:10px;font-style:italic;color:var(--moon);
+  }
+  blockquote::before{content:"“";position:absolute;top:-18px;left:14px;font-size:56px;
+    color:var(--gold);opacity:.55;font-family:Georgia,serif}
+  blockquote cite{display:block;margin-top:10px;font-style:normal;font-size:.82rem;color:var(--ink-dim)}
+  /* ———— 提示框 ———— */
+  .callout{margin:26px 0;padding:18px 22px;border-radius:10px;background:var(--card);
+    border:1px solid var(--line);backdrop-filter:blur(4px)}
+  .callout .tag{display:inline-block;font-size:.72rem;letter-spacing:.18em;padding:2px 12px;
+    border-radius:999px;margin-bottom:10px;font-weight:600}
+  .callout.note{border-color:rgba(143,183,255,.45)} .callout.note .tag{background:rgba(143,183,255,.18);color:var(--accent)}
+  .callout.important{border-color:rgba(232,201,122,.45)} .callout.important .tag{background:rgba(232,201,122,.16);color:var(--gold)}
+  .callout.warning{border-color:rgba(255,140,140,.45)} .callout.warning .tag{background:rgba(255,140,140,.14);color:#ff9c9c}
+  .callout.tip{border-color:rgba(140,230,190,.4)} .callout.tip .tag{background:rgba(140,230,190,.14);color:#8ce6be}
+  /* ———— 表格 ———— */
+  .table-box{overflow-x:auto;margin:26px 0;border-radius:10px;border:1px solid var(--line)}
   table{width:100%;border-collapse:collapse;font-size:.92rem;background:var(--card)}
-  th,td{padding:13px 16px;border:1px solid rgba(226,149,90,.2);text-align:left;vertical-align:top}
-  th{background:rgba(255,171,74,.14);color:var(--ink);letter-spacing:.1em;font-weight:700}
-  td:first-child{font-weight:700;color:var(--morning-blue);white-space:nowrap}
-
-  /* 练习步骤 */
-  ol.practice{list-style:none;counter-reset:step;margin:26px 0}
-  ol.practice li{counter-increment:step;position:relative;padding:18px 0 18px 66px;
-    border-bottom:1px dashed var(--line)}
-  ol.practice li:last-child{border-bottom:none}
-  ol.practice li::before{content:counter(step,cjk-ideographic);position:absolute;left:8px;top:16px;
-    width:38px;height:38px;line-height:38px;text-align:center;border-radius:50%;
-    color:#fff;font-size:1.05rem;font-weight:700;
-    background:radial-gradient(circle at 35% 30%,var(--sun) 0%,var(--sun-deep) 75%);
-    box-shadow:0 3px 10px rgba(240,127,46,.35)}
-  ol.practice li p{margin-bottom:6px}
-  ol.practice .p-title{font-weight:700;color:var(--ink)}
-  ol.practice .p-tag{font-size:.78rem;color:var(--ink-faint);letter-spacing:.05em}
-
-  .divider{margin:60px auto 0;width:160px;height:2px;
-    background:linear-gradient(90deg,transparent,var(--morning-blue) 25%,var(--sun) 50%,var(--morning-blue) 75%,transparent);
-    border-radius:2px;opacity:.55}
-  footer{margin-top:56px;text-align:center;font-size:.8rem;color:var(--ink-faint)}
-  footer a{color:var(--accent);text-decoration:none;border-bottom:1px dotted var(--accent)}
-
+  th{background:rgba(143,183,255,.12);color:var(--star);padding:13px 16px;text-align:left;
+     border-bottom:1px solid var(--line);white-space:nowrap}
+  td{padding:12px 16px;border-bottom:1px solid rgba(143,183,255,.1);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  td:first-child{font-weight:700;color:var(--accent);white-space:nowrap}
+  /* ———— 练习步骤 ———— */
+  .step{margin:18px 0;padding:18px 20px;border:1px solid var(--line);border-radius:10px;
+    background:var(--card);position:relative;padding-left:70px}
+  .step .num{position:absolute;left:18px;top:18px;width:34px;height:34px;border-radius:50%;
+    border:1px solid var(--accent);color:var(--accent);display:flex;align-items:center;
+    justify-content:center;font-weight:700;font-size:.95rem}
+  .step .concept{font-size:.75rem;color:var(--ink-dim);letter-spacing:.08em;margin-top:6px}
+  hr{border:none;height:1px;background:var(--line);margin:56px 0}
+  footer{text-align:center;color:var(--ink-dim);font-size:.8rem;margin-top:24px}
+  footer a{color:var(--accent);text-decoration:none}
+  .nav-back{display:inline-block;margin-top:30px;color:var(--accent);text-decoration:none;
+    border:1px solid var(--line);padding:8px 22px;border-radius:999px;font-size:.85rem;
+    transition:background .3s}
+  .nav-back:hover{background:rgba(143,183,255,.12)}
   @media (max-width:640px){
-    h1{font-size:1.75rem}
+    h1{font-size:1.8rem}
     h2{font-size:1.25rem}
-    .sun-wrap{width:130px;height:130px;top:4%;right:5%}
-    .wrap{padding:48px 16px 72px}
-    table{font-size:.82rem}
-    th,td{padding:10px 10px}
-    ol.practice li{padding-left:56px}
+    .breath{width:130px;height:130px;top:5%;right:4%}
+    .wrap{padding:40px 16px 72px}
   }
 </style>
 </head>
 <body>
 
-<div class="sun-wrap">
-  <div class="rays"></div>
-  <div class="sun"></div>
-</div>
-<div class="mist" style="top:22%;height:90px"></div>
-<div class="mist" style="top:58%;height:120px;animation-delay:-8s"></div>
-<div class="mist" style="bottom:6%;height:100px;animation-delay:-15s"></div>
+<div class="stars" id="stars1"></div>
+<div class="stars2" id="stars2"></div>
+<div class="stars3" id="stars3"></div>
+<div class="breath"></div>
 
 <div class="wrap">
 
 <header>
   <div class="series">精读《当下的力量》 · 第 02 篇</div>
-  <h1>痛<span class="accent">苦</span>之身</h1>
+  <h1>🌊 痛苦之身</h1>
   <div class="subtitle">深夜 emo 与情绪反刍</div>
-  <div class="dawn-mark">观 照 · 晨 光</div>
-  <div class="meta">文本依据：《当下的力量》（曹植译）第二章「意识：摆脱痛苦的途径」 ｜ 2026-07-21</div>
+  <blockquote style="max-width:560px;margin:30px auto 0;text-align:left">
+    "痛苦之身害怕被你发现。它的生存取决于你对它无意识的认同，以及你面对内在痛苦时，那种无意识的害怕。"
+    <cite>—— 埃克哈特·托利《当下的力量》</cite>
+  </blockquote>
+  <div class="meta">文本依据：《当下的力量》（曹植译，中信出版社）第二章「意识：摆脱痛苦的途径」 ｜ 2026-07-21</div>
 </header>
 
-<div class="brush-quote">
-  "痛苦之身害怕被你发现。它的生存取决于你对它无意识的认同，以及你面对内在痛苦时，那种无意识的害怕。"
-  <cite>—— 埃克哈特·托利《当下的力量》</cite>
-</div>
-
-<div class="callout note" data-label="核心论点">
-  <p>为什么有些痛苦"想通"了也不散，时间过去很久也不愈，甚至你越安抚它，它越来劲？托利给出了一个令人不安却极具解释力的答案：<strong>痛苦在你体内不只是一段记忆，而是一个半自主的能量场——"痛苦之身"（pain-body）</strong>。它以痛苦为食，靠你对它的认同续命，会在深夜、酒后、疲惫时准时"苏醒"，主动调取旧伤、挑起冲突、引诱你反刍——因为那就是它的饭。深夜 emo 不是"情绪来了"，而是你被一个以情绪为食的内在实体接管了。瓦解它的方式不是对抗，也不是发泄，而是第 01 篇已经打好的那门功夫：<strong>观察，而不认同。</strong></p>
+<div class="callout note">
+  <span class="tag">核心论点</span>
+  <p>为什么有些痛苦"想通"了也不散，时间过去很久也不愈，甚至你越安抚它，它越来劲？托利给出了一个令人不安却极具解释力的答案：<strong>痛苦在你体内不只是一段记忆，而是一个半自主的能量场——"痛苦之身"（pain-body）</strong>。它以痛苦为食，靠你对它的认同续命，会在深夜、酒后、疲惫时准时"苏醒"，主动调取旧伤、挑起冲突、引诱你反刍——因为那就是它的饭。深夜 emo 不是"情绪来了"，而是你被一个以痛苦为食的内在实体接管了。瓦解它的方式不是对抗，也不是发泄，而是第 01 篇已经打好的那门功夫：<strong>观察，而不认同。</strong></p>
 </div>
 
 <h2>一、引言：准时发作的 emo</h2>
@@ -154,7 +129,8 @@
 
 <p>主流话语对此有两套解释：一是病理化的——"你情绪管理能力差"；二是时间化的——"时间会治愈一切"。</p>
 
-<div class="callout important" data-label="问题的提出">
+<div class="callout important">
+  <span class="tag">问题的提出</span>
   <p>这两套解释都解释不了 emo 的<strong>规律性</strong>和<strong>成瘾性</strong>。为什么痛苦总在防御最低的深夜发作？为什么十年前的伤口今天碰一下还像新的？为什么人会对自己的痛苦产生隐秘的依恋？</p>
   <p>托利在第二章给出的回答颠覆常识：<strong>痛苦不只是发生在你身上的事件，它还是住在你体内的"东西"。</strong>它有半自主的生命力，有进食需求，有作息规律，有自我保护的本能。你不放下它，有时候不是因为你执着，而是因为它不想被放下——放下意味着它的死亡。</p>
 </div>
@@ -162,56 +138,46 @@
 <h2>二、概念基石：痛苦之身是什么</h2>
 
 <h3>2.1 定义：过去未化解的情绪能量场</h3>
-
-<div class="brush-quote">
+<blockquote>
   "痛苦之身是我们内在的一个能量场，它是我们过去未被合理表达和适当释放而积累下来的负面情绪能量所形成的。"
-  <cite>——《当下的力量》第二章</cite>
-</div>
-
+  <cite>—— 《当下的力量》第二章</cite>
+</blockquote>
 <p>关键在于"未被表达和释放"。情绪本来的设计是<strong>流过</strong>身体：恐惧让你逃，愤怒让你抗，悲伤让你哭——完成了，就过去了。但如果情绪发生的当下被压抑、被合理化、被思维接管，它就没有完成自己的循环。这股没走完的能量不会凭空消失，它沉积下来，与一次次相似的旧痛合并、结晶，最终在体内形成一个<strong>半自主的负面情绪场</strong>。托利对它的描述近乎对一个生命体的描述：它休眠、它苏醒、它进食、它抗拒死亡。</p>
 
 <h3>2.2 休眠与活跃：痛苦之身的作息</h3>
-
-<div class="brush-quote">
+<blockquote>
   "痛苦之身有两种存在模式：休眠和活跃。"
-  <cite>——《当下的力量》第二章</cite>
-</div>
-
+  <cite>—— 《当下的力量》第二章</cite>
+</blockquote>
 <p>休眠期，你可以完全感觉不到它。但某些触发条件会让它瞬间苏醒：关系中的摩擦、一句似曾相识的指责、深夜的孤独、酒精、疲惫，甚至一首老歌。苏醒后的痛苦之身会立刻做两件事：<strong>接管你的思维</strong>（emo 时想的全是同一类念头）和<strong>制造新的痛苦</strong>（挑起争吵、曲解他人的话）——因为它需要进食。</p>
 
 <h3>2.3 以痛苦为食：最反直觉的部分</h3>
-
-<div class="brush-quote">
+<blockquote>
   痛苦之身"需要从你的经验中获取食物。它以任何与它能量共振的经历、各种形式创造的痛苦为食……一旦痛苦之身掌控了你，你就会在生活中为它创造更多它需要的食物。"
-  <cite>——《当下的力量》第二章</cite>
-</div>
-
+  <cite>—— 《当下的力量》第二章</cite>
+</blockquote>
 <p>情绪反刍不是"处理痛苦失败"，而是<strong>喂养痛苦成功</strong>。每一次回放旧伤、每一次"如果当时"、每一次向朋友第两百次讲述同一个委屈，痛苦之身都在进餐。这解释了：为什么"想通了"不管用——想，正是它的进食方式（呼应第 01 篇："分析痛苦是在给痛苦续费"，现在我们看清了收款方是谁）；为什么有人反复进入同构的糟糕关系；为什么 emo 有隐秘的快感。</p>
 
 <h3>2.4 痛苦之身与小我：一对共生体</h3>
-
-<div class="brush-quote">
+<blockquote>
   "痛苦之身其实是小我投射出来的阴影，它很害怕你的意识之光。"
-  <cite>——《当下的力量》第二章</cite>
-</div>
-
+  <cite>—— 《当下的力量》第二章</cite>
+</blockquote>
 <p><strong>小我驻扎在思维层，痛苦之身驻扎在情绪层；小我用念头构造"我"，痛苦之身用痛苦证明"我"。</strong>它们互相喂养：痛苦之身苏醒时，小我立刻编造配得上这份痛苦的叙事；叙事越牢固，痛苦之身越有存在感。深夜 emo 的经典流程——先是情绪涌起，紧接着思维为它搜集证据——就是这个共生系统的标准作业流程。</p>
 
 <h3>2.5 瓦解痛苦之身：不喂，不斗，只是看见</h3>
-
-<div class="brush-quote">
+<blockquote>
   "将注意力集中在你内心的感受上，了解到这就是痛苦之身并接受它的存在；别去想它，别让你的感受变成大脑和思维……保持临在，继续观察你的内在。"
-  <cite>——《当下的力量》第二章</cite>
-</div>
-
-<div class="callout warning" data-label="常见误读">
+  <cite>—— 《当下的力量》第二章</cite>
+</blockquote>
+<div class="callout warning">
+  <span class="tag">常见误读</span>
   <p><strong>误读一："释放痛苦"就是尽情发泄、哭喊、捶枕头。</strong>发泄常常在重复喂养——把痛苦表演出来，和把痛苦咽下去，都是认同的形式。托利说的"释放"指的是允许情绪在当下被<strong>直接感受</strong>、走完它的循环。</p>
   <p><strong>误读二："观察情绪"就是分析情绪。</strong>分析仍是思维活动，而思维是痛苦之身最熟悉的战场（呼应第 01 篇：思维的病不能用思维治）。观察是把注意力沉到身体层面，直接感受那股能量本身——胸口的紧、胃里的坠——不带任何故事。</p>
   <p>还有第三条边界：<strong>接纳 ≠ 喜欢，看见 ≠ 同意</strong>。你接纳"痛苦之身此刻存在"这个事实，恰恰是为了不再被它操控。</p>
 </div>
 
 <h2>三、一张表：认同痛苦之身 × 见证痛苦之身</h2>
-
 <div class="table-box">
 <table>
   <tr><th>维度</th><th>认同状态（被接管）</th><th>见证状态（临在观察）</th></tr>
@@ -227,7 +193,8 @@
 
 <h2>四、解剖"深夜 emo"：痛苦之身在当代的进食场</h2>
 
-<div class="callout note" data-label="系列递进">
+<div class="callout note">
+  <span class="tag">系列递进</span>
   <p>第 01 篇在<strong>思维层</strong>建立了核心区分——你不是你的念头，内耗源于思维认同。本篇下沉到<strong>情绪层</strong>：念头之下还有一股更古老、更黏稠的能量，它不但认同思维，还主动劫持思维为它服务。第 01 篇问"那个喋喋不休的声音是谁"，本篇问"那个准时在深夜涨潮的情绪是谁"——它们是同一个假我在两个层面上的化身。</p>
 </div>
 
@@ -258,44 +225,37 @@
 
 <h2>六、实践：五个可以立刻做的练习</h2>
 
-<ol class="practice">
-  <li>
-    <p class="p-title">给身体扫描定位</p>
-    <p class="p-tag">对应概念：痛苦之身的身体性</p>
-    <p>情绪上头时，先不问"为什么"，先问"在哪里"：找到这股情绪在身体里的位置——胸口的紧？胃里的坠？用三十秒纯粹地感受那个部位的体感，不命名、不分析。情绪一旦被还原为身体感受，它就从"我"变成了"它"。</p>
-  </li>
-  <li>
-    <p class="p-title">命名"它"而不是"我"</p>
-    <p class="p-tag">对应概念：撤回认同</p>
-    <p>深夜 emo 来袭时，把内心独白从"我好难过"换成"我注意到一股难过在我体内"，甚至可以打招呼："哦，痛苦之身醒了。"语言的重构会直接松动认同——这是观察者（第 01 篇）在情绪层的工作方式。</p>
-  </li>
-  <li>
-    <p class="p-title">反刍刹车三问</p>
-    <p class="p-tag">对应概念：断粮</p>
-    <p>发现自己在第 N 次回放同一个伤口时问：①这次回放会产生一个<strong>具体行动</strong>吗？②与上次相比有<strong>新信息</strong>吗？③回放完更轻松还是更沉重？三问皆否：这不是消化，是喂食。把注意力转回呼吸或身体。</p>
-  </li>
-  <li>
-    <p class="p-title">emo 内容的觉知观看</p>
-    <p class="p-tag">对应概念：集体痛苦之身</p>
-    <p>不必戒掉伤感歌单——带着实验态度去听：分出一小部分注意力，观察身体的变化、念头的走向，观察那种"痛并想继续"的引力本身。看完想继续还是关掉，由观察者决定，而不是由它决定。</p>
-  </li>
-  <li>
-    <p class="p-title">被触发瞬间的"认账"练习</p>
-    <p class="p-tag">对应概念：触发与空隙</p>
-    <p>下一次在关系中被一句话点燃时，在爆发前心里默念："我被触发的情绪，比这件事本身大——这是旧东西。"不求不生气，只求在生气的同时有一个角落知道自己在生气。那个角落就是断粮开始的地方。</p>
-  </li>
-</ol>
+<div class="step"><div class="num">1</div>
+  <strong>给身体扫描定位</strong> —— 情绪上头时，先不问"为什么"，先问"在哪里"：找到这股情绪在身体里的位置——胸口的紧？胃里的坠？用三十秒纯粹地感受那个部位的体感，不命名、不分析。情绪一旦被还原为身体感受，它就从"我"变成了"它"。
+  <div class="concept">对应概念：痛苦之身的身体性</div>
+</div>
+<div class="step"><div class="num">2</div>
+  <strong>命名"它"而不是"我"</strong> —— 深夜 emo 来袭时，把内心独白从"我好难过"换成"我注意到一股难过在我体内"，甚至可以打招呼："哦，痛苦之身醒了。"语言的重构会直接松动认同——这是观察者（第 01 篇）在情绪层的工作方式。
+  <div class="concept">对应概念：撤回认同</div>
+</div>
+<div class="step"><div class="num">3</div>
+  <strong>反刍刹车三问</strong> —— 发现自己在第 N 次回放同一个伤口时问：①这次回放会产生一个<strong>具体行动</strong>吗？②与上次相比有<strong>新信息</strong>吗？③回放完更轻松还是更沉重？三问皆否：这不是消化，是喂食。把注意力转回呼吸或身体。
+  <div class="concept">对应概念：断粮</div>
+</div>
+<div class="step"><div class="num">4</div>
+  <strong>emo 内容的觉知观看</strong> —— 不必戒掉伤感歌单——带着实验态度去听：分出一小部分注意力，观察身体的变化、念头的走向，观察那种"痛并想继续"的引力本身。看完想继续还是关掉，由观察者决定，而不是由它决定。
+  <div class="concept">对应概念：集体痛苦之身</div>
+</div>
+<div class="step"><div class="num">5</div>
+  <strong>被触发瞬间的"认账"练习</strong> —— 下一次在关系中被一句话点燃时，在爆发前心里默念："我被触发的情绪，比这件事本身大——这是旧东西。"不求不生气，只求在生气的同时有一个角落知道自己在生气。那个角落就是断粮开始的地方。
+  <div class="concept">对应概念：触发与空隙</div>
+</div>
 
 <h2>七、结论</h2>
 
 <h3>核心发现</h3>
-<p>
-1. <strong>痛苦不只是记忆，而是能量库存</strong>：未被表达和释放的负面情绪沉积为"痛苦之身"，有休眠与活跃两种模式。<br>
-2. <strong>深夜 emo 是痛苦之身的进食窗口</strong>：不是深夜制造的痛苦，而是白天被压住、深夜获得出场机会的库存痛苦。<br>
-3. <strong>反刍不是消化而是喂养</strong>：指向具体行动的是消化，原地转圈的是喂食。<br>
-4. <strong>痛苦之身与小我共生</strong>：一个用痛苦证明"我存在"，一个用叙事喂养痛苦；瓦解它们的是同一个动作——观察而不认同。<br>
-5. <strong>概念边界</strong>：痛苦之身是现象学模型而非临床诊断；它解释情绪的成瘾性，不替代心理治疗，更不该成为逃避现实的灵性借口。
-</p>
+<ol>
+  <li><strong>痛苦不只是记忆，而是能量库存</strong>：未被表达和释放的负面情绪沉积为"痛苦之身"，有休眠与活跃两种模式。</li>
+  <li><strong>深夜 emo 是痛苦之身的进食窗口</strong>：不是深夜制造的痛苦，而是白天被压住、深夜获得出场机会的库存痛苦。</li>
+  <li><strong>反刍不是消化而是喂养</strong>：指向具体行动的是消化，原地转圈的是喂食。</li>
+  <li><strong>痛苦之身与小我共生</strong>：一个用痛苦证明"我存在"，一个用叙事喂养痛苦；瓦解它们的是同一个动作——观察而不认同。</li>
+  <li><strong>概念边界</strong>：痛苦之身是现象学模型而非临床诊断；它解释情绪的成瘾性，不替代心理治疗，更不该成为逃避现实的灵性借口。</li>
+</ol>
 
 <h3>出路</h3>
 <div class="table-box">
@@ -308,29 +268,46 @@
 </table>
 </div>
 
-<div class="callout tip" data-label="延伸阅读">
+<div class="callout tip">
+  <span class="tag">延伸阅读</span>
   <p>本篇留下一个关键伏笔：痛苦之身为什么总能靠"过去"和"未来"进食？因为喂养它的不止是情绪，还有一种更根本的东西：<strong>心理时间</strong>。深夜反刍发生在过去，焦虑发生在未来，而痛苦之身唯独无法在当下存活。下一篇<strong>《心理时间与钟表时间：deadline 焦虑与"等以后就好了"》</strong>，我们将拆掉痛苦之身的最后一根输血管。</p>
 </div>
 
-<div class="brush-quote">
+<blockquote>
   "痛苦之身害怕被你发现。它的生存取决于你对它无意识的认同……当你不再认同它，它就失去了控制你的力量。"
-  <cite>——《当下的力量》第二章</cite>
-</div>
-
+  <cite>—— 《当下的力量》第二章</cite>
+</blockquote>
 <p>我们无法命令痛苦离开，但可以在它准时来访的每一个深夜，做一个极小的动作：<strong>看着它，知道它是谁——然后它就吃不到这顿饭了。</strong></p>
 
-<div class="callout tip" data-label="最后的判断">
+<div class="callout tip">
+  <span class="tag">最后的判断</span>
   <p><strong>深夜破防的你，不是在"情绪化"，而是在被体内一个以痛苦为食的实体准时接管。它的力量全部来自你的无意识；它的死穴只有一处——被你看见。看见，就是断粮；断粮，就是解脱的开始。</strong></p>
 </div>
 
-<div class="divider"></div>
-
+<hr>
 <footer>
-  <p>报告生成时间：2026-07-21 ｜ 精读《当下的力量》系列 · 第 02 篇</p>
-  <p style="margin-top:10px"><a href="you-are-not-your-mind.html">← 上一篇：你不是你的大脑</a> ｜ <a href="index.html">系列导航</a> ｜ <a href="psychological-time.html">下一篇：心理时间 →</a></p>
+  <p><em>报告生成时间：2026-07-21 ｜ 精读《当下的力量》系列 · 第 02 篇</em></p>
+  <p style="margin-top:14px"><a href="you-are-not-your-mind.html">← 上一篇：你不是你的大脑</a> ｜ <a href="psychological-time.html">下一篇：心理时间 →</a></p>
+  <a class="nav-back" href="index.html">← 返回系列首页</a>
 </footer>
 
 </div>
+
+<script>
+(function(){
+  function scatter(id,count){
+    var box=document.getElementById(id);
+    for(var i=0;i<count;i++){
+      var s=document.createElement('i');
+      s.style.left=Math.random()*100+'%';
+      s.style.top=Math.random()*100+'%';
+      s.style.animationDelay=(Math.random()*6)+'s';
+      box.appendChild(s);
+    }
+  }
+  scatter('stars1',50);scatter('stars2',70);scatter('stars3',90);
+})();
+</script>
 
 </body>
 </html>
