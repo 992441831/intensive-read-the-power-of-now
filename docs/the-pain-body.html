@@ -6,89 +6,112 @@
 <title>痛苦之身 —— 深夜 emo 与情绪反刍 ｜ 精读《当下的力量》02</title>
 <style>
   :root{
-    --paper:#f6f1e7; --paper-deep:#efe7d8; --ink:#2b2b2b; --ink-soft:#55524a;
-    --ink-faint:#8a8578; --indigo:#3a4a6b; --cinnabar:#b03a2e; --line:#d9d0bd;
+    --cream:#fff8ee; --peach:#fde9d4; --sky:#e3edf7;
+    --sun:#ffab4a; --sun-deep:#f07f2e; --gold:#e8955a;
+    --ink:#4a3f35; --ink-soft:#6f6154; --ink-faint:#a3907d;
+    --accent:#e2762d; --morning-blue:#5a7ba6;
+    --card:rgba(255,252,246,.72); --line:rgba(226,149,90,.28);
   }
   *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
   body{
     font-family:"Noto Serif SC","Songti SC","SimSun","STSong",serif;
-    background:var(--paper);color:var(--ink);line-height:2;
-    background-image:radial-gradient(rgba(43,43,43,.028) 1px,transparent 1px);
-    background-size:26px 26px;
+    background:linear-gradient(180deg,#dfe9f5 0%,#f3e4d3 30%,var(--peach) 62%,var(--cream) 100%);
+    color:var(--ink);line-height:2;overflow-x:hidden;
   }
-  /* 晕染墨点 */
-  .inkblot{position:fixed;border-radius:50%;pointer-events:none;z-index:0;
-    background:radial-gradient(circle,rgba(58,74,107,.10) 0%,rgba(58,74,107,.04) 45%,transparent 70%);
-    animation:bleed 14s ease-in-out infinite}
-  @keyframes bleed{0%,100%{transform:scale(1);opacity:.7}50%{transform:scale(1.15);opacity:1}}
+  /* ———— 晨光太阳 ———— */
+  .sun-wrap{position:fixed;top:5%;right:8%;width:230px;height:230px;pointer-events:none;z-index:0}
+  .sun{position:absolute;inset:26%;border-radius:50%;
+    background:radial-gradient(circle,#fff3d6 0%,var(--sun) 55%,var(--sun-deep) 100%);
+    box-shadow:0 0 60px rgba(255,171,74,.55),0 0 140px rgba(255,171,74,.3);
+    animation:sunbreathe 9s ease-in-out infinite}
+  @keyframes sunbreathe{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.07);opacity:1}}
+  .rays{position:absolute;inset:-22%;border-radius:50%;opacity:.5;
+    background:repeating-conic-gradient(from 0deg,rgba(255,190,110,.35) 0deg 4deg,transparent 4deg 24deg);
+    -webkit-mask-image:radial-gradient(circle,transparent 26%,#000 30%,transparent 68%);
+    mask-image:radial-gradient(circle,transparent 26%,#000 30%,transparent 68%);
+    animation:spin 60s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  /* ———— 晨雾 ———— */
+  .mist{position:fixed;left:0;right:0;pointer-events:none;z-index:0;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);
+    filter:blur(30px);animation:drift 26s ease-in-out infinite alternate}
+  @keyframes drift{from{transform:translateX(-6%)}to{transform:translateX(6%)}}
+  /* ———— 布局 ———— */
   .wrap{position:relative;z-index:1;max-width:820px;margin:0 auto;padding:72px 24px 100px}
 
   header{text-align:center;margin-bottom:56px}
   .series{font-size:.78rem;letter-spacing:.55em;color:var(--ink-faint);margin-bottom:26px}
   h1{font-size:2.5rem;font-weight:700;letter-spacing:.12em;color:var(--ink)}
-  h1 .accent{color:var(--cinnabar)}
+  h1 .accent{color:var(--accent)}
   .subtitle{font-size:1.05rem;color:var(--ink-soft);margin-top:10px;letter-spacing:.18em}
-  .seal{display:inline-block;margin-top:26px;padding:6px 14px;background:var(--cinnabar);
-    color:#fdf8ef;font-size:.85rem;letter-spacing:.35em;border-radius:4px;
-    box-shadow:2px 2px 0 rgba(176,58,46,.25);transform:rotate(-2deg)}
+  .dawn-mark{display:inline-block;margin-top:26px;padding:6px 16px;font-size:.85rem;
+    letter-spacing:.35em;color:#fff;border-radius:999px;
+    background:linear-gradient(90deg,var(--morning-blue),var(--sun-deep));
+    box-shadow:0 3px 14px rgba(240,127,46,.35)}
   .meta{margin-top:26px;font-size:.8rem;color:var(--ink-faint);letter-spacing:.06em}
 
-  /* 引文：左侧笔触 */
+  /* 引文：左侧晨光 */
   .brush-quote{position:relative;margin:44px 0;padding:8px 0 8px 34px;font-size:1.02rem;
     color:var(--ink-soft);font-style:italic}
   .brush-quote::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;
-    background:linear-gradient(180deg,transparent 0%,var(--indigo) 12%,var(--indigo) 82%,transparent 100%);
-    border-radius:3px;opacity:.75}
+    background:linear-gradient(180deg,transparent 0%,var(--sun) 12%,var(--sun-deep) 82%,transparent 100%);
+    border-radius:3px;opacity:.85}
   .brush-quote cite{display:block;margin-top:8px;font-style:normal;font-size:.82rem;color:var(--ink-faint)}
 
   h2{font-size:1.55rem;margin:64px 0 26px;letter-spacing:.1em;color:var(--ink);
     display:flex;align-items:center;gap:14px}
-  h2::before{content:"";width:34px;height:2px;background:var(--cinnabar);opacity:.8}
-  h3{font-size:1.15rem;margin:38px 0 16px;color:var(--indigo);letter-spacing:.06em}
+  h2::before{content:"";width:34px;height:2px;
+    background:linear-gradient(90deg,var(--morning-blue),var(--sun-deep));opacity:.9}
+  h3{font-size:1.15rem;margin:38px 0 16px;color:var(--morning-blue);letter-spacing:.06em}
   p{margin-bottom:18px;text-align:justify}
   strong{color:var(--ink)}
-  em{color:var(--indigo);font-style:normal;border-bottom:1px dotted var(--indigo)}
+  em{color:var(--sun-deep);font-style:normal;border-bottom:1px dotted var(--sun-deep)}
 
   /* 提示框 */
   .callout{margin:30px 0;padding:20px 24px;border:1px solid var(--line);
-    background:rgba(255,255,255,.45);border-radius:2px;position:relative}
+    background:var(--card);border-radius:10px;position:relative;
+    box-shadow:0 4px 18px rgba(226,118,45,.06)}
   .callout::before{content:attr(data-label);position:absolute;top:-11px;left:18px;
-    padding:1px 12px;font-size:.72rem;letter-spacing:.25em;background:var(--paper)}
-  .callout.note::before{color:var(--indigo);border:1px solid var(--indigo)}
-  .callout.important::before{color:var(--cinnabar);border:1px solid var(--cinnabar)}
-  .callout.warning::before{color:#8a6d1a;border:1px solid #8a6d1a}
-  .callout.tip::before{color:#4a6741;border:1px solid #4a6741}
+    padding:1px 12px;font-size:.72rem;letter-spacing:.25em;border-radius:999px;background:var(--cream)}
+  .callout.note::before{color:var(--morning-blue);border:1px solid var(--morning-blue)}
+  .callout.important::before{color:var(--accent);border:1px solid var(--accent)}
+  .callout.warning::before{color:#a3721b;border:1px solid #c9a03c}
+  .callout.tip::before{color:#4a7a52;border:1px solid #6fa877}
   .callout p:last-child{margin-bottom:0}
 
-  /* 表格：宣纸册页 */
-  table{width:100%;border-collapse:collapse;margin:28px 0;font-size:.92rem;
-    background:rgba(255,255,255,.5)}
-  th,td{padding:13px 16px;border:1px solid var(--line);text-align:left;vertical-align:top}
-  th{background:var(--paper-deep);color:var(--ink);letter-spacing:.1em;font-weight:700}
-  td:first-child{font-weight:700;color:var(--indigo);white-space:nowrap}
+  /* 表格 */
+  .table-box{overflow-x:auto;margin:28px 0;border-radius:10px;border:1px solid var(--line);
+    box-shadow:0 4px 18px rgba(226,118,45,.06)}
+  table{width:100%;border-collapse:collapse;font-size:.92rem;background:var(--card)}
+  th,td{padding:13px 16px;border:1px solid rgba(226,149,90,.2);text-align:left;vertical-align:top}
+  th{background:rgba(255,171,74,.14);color:var(--ink);letter-spacing:.1em;font-weight:700}
+  td:first-child{font-weight:700;color:var(--morning-blue);white-space:nowrap}
 
-  /* 练习步骤：竖排序号圈 */
+  /* 练习步骤 */
   ol.practice{list-style:none;counter-reset:step;margin:26px 0}
   ol.practice li{counter-increment:step;position:relative;padding:18px 0 18px 66px;
     border-bottom:1px dashed var(--line)}
   ol.practice li:last-child{border-bottom:none}
   ol.practice li::before{content:counter(step,cjk-ideographic);position:absolute;left:8px;top:16px;
-    width:38px;height:38px;line-height:38px;text-align:center;border:1.5px solid var(--cinnabar);
-    border-radius:50%;color:var(--cinnabar);font-size:1.05rem;font-weight:700;
-    transform:rotate(-3deg)}
+    width:38px;height:38px;line-height:38px;text-align:center;border-radius:50%;
+    color:#fff;font-size:1.05rem;font-weight:700;
+    background:radial-gradient(circle at 35% 30%,var(--sun) 0%,var(--sun-deep) 75%);
+    box-shadow:0 3px 10px rgba(240,127,46,.35)}
   ol.practice li p{margin-bottom:6px}
   ol.practice .p-title{font-weight:700;color:var(--ink)}
   ol.practice .p-tag{font-size:.78rem;color:var(--ink-faint);letter-spacing:.05em}
 
-  .divider{margin:60px auto 0;width:120px;height:14px;
-    background:linear-gradient(90deg,transparent,var(--ink-faint) 20%,var(--ink) 50%,var(--ink-faint) 80%,transparent);
-    border-radius:50%;opacity:.35}
+  .divider{margin:60px auto 0;width:160px;height:2px;
+    background:linear-gradient(90deg,transparent,var(--morning-blue) 25%,var(--sun) 50%,var(--morning-blue) 75%,transparent);
+    border-radius:2px;opacity:.55}
   footer{margin-top:56px;text-align:center;font-size:.8rem;color:var(--ink-faint)}
-  footer a{color:var(--indigo);text-decoration:none;border-bottom:1px dotted var(--indigo)}
+  footer a{color:var(--accent);text-decoration:none;border-bottom:1px dotted var(--accent)}
 
   @media (max-width:640px){
     h1{font-size:1.75rem}
     h2{font-size:1.25rem}
+    .sun-wrap{width:130px;height:130px;top:4%;right:5%}
     .wrap{padding:48px 16px 72px}
     table{font-size:.82rem}
     th,td{padding:10px 10px}
@@ -98,9 +121,13 @@
 </head>
 <body>
 
-<div class="inkblot" style="top:8%;left:-6%;width:340px;height:340px"></div>
-<div class="inkblot" style="top:55%;right:-8%;width:420px;height:420px;animation-delay:-6s"></div>
-<div class="inkblot" style="bottom:-4%;left:14%;width:280px;height:280px;animation-delay:-3s"></div>
+<div class="sun-wrap">
+  <div class="rays"></div>
+  <div class="sun"></div>
+</div>
+<div class="mist" style="top:22%;height:90px"></div>
+<div class="mist" style="top:58%;height:120px;animation-delay:-8s"></div>
+<div class="mist" style="bottom:6%;height:100px;animation-delay:-15s"></div>
 
 <div class="wrap">
 
@@ -108,7 +135,7 @@
   <div class="series">精读《当下的力量》 · 第 02 篇</div>
   <h1>痛<span class="accent">苦</span>之身</h1>
   <div class="subtitle">深夜 emo 与情绪反刍</div>
-  <div class="seal">观 照</div>
+  <div class="dawn-mark">观 照 · 晨 光</div>
   <div class="meta">文本依据：《当下的力量》（曹植译）第二章「意识：摆脱痛苦的途径」 ｜ 2026-07-21</div>
 </header>
 
@@ -185,6 +212,7 @@
 
 <h2>三、一张表：认同痛苦之身 × 见证痛苦之身</h2>
 
+<div class="table-box">
 <table>
   <tr><th>维度</th><th>认同状态（被接管）</th><th>见证状态（临在观察）</th></tr>
   <tr><td>自我定位</td><td>"我很痛苦"——痛苦就是我</td><td>"我体内有一股痛苦在"——痛苦是观察对象</td></tr>
@@ -195,6 +223,7 @@
   <tr><td>对他人</td><td>挑起冲突以获取共振的痛苦</td><td>认出对方也被其痛苦之身接管，不接招</td></tr>
   <tr><td>痛苦的寿命</td><td>被反复续费，十年如昨日</td><td>走完循环，自然消散，留下平静</td></tr>
 </table>
+</div>
 
 <h2>四、解剖"深夜 emo"：痛苦之身在当代的进食场</h2>
 
@@ -216,12 +245,14 @@
 
 <h2>五、超越托利：批判性反思</h2>
 
+<div class="table-box">
 <table>
   <tr><th>反思维度</th><th>风险</th><th>必要的补充</th></tr>
   <tr><td>概念的准科学地位</td><td>"能量场"的表述近乎神秘主义，容易被当成超自然实体来信</td><td>知识诚实的读法：把痛苦之身当作一个<strong>现象学模型</strong>——它描述可被内观验证的经验结构，与情绪记忆、创伤的躯体化、反刍思维高度同构。用不用"能量"这个词不重要，重要的是现象真实存在</td></tr>
   <tr><td>用"觉察"替代治疗</td><td>把抑郁、创伤后应激等临床问题读成"观察它就好"，是危险的简化</td><td>长期、重度、功能受损的情绪痛苦，请寻求专业心理帮助。托利的练习是日常的功夫，<strong>不是临床治疗的替代品</strong>；真正临在的人，恰恰有能力不带羞耻地求助</td></tr>
   <tr><td>灵性逃避的新形式</td><td>"这不是我，这只是我的痛苦之身"可能变成高级解离——把正当的愤怒、合理的悲伤统统"观察"掉</td><td>情绪被见证之后，该道的歉要道，该立的边界要立。痛苦之身被瓦解，<strong>现实问题一分都不会自动消失</strong>（呼应第 01 篇：觉察解决认同层面，不解决事实层面）</td></tr>
 </table>
+</div>
 
 <p>一句话归结：<strong>痛苦之身是用来"看见"的，不是用来"背锅"的。</strong>把一切推给它，和把一切推给"水逆"，在结构上是同一种偷懒。</p>
 
@@ -267,6 +298,7 @@
 </p>
 
 <h3>出路</h3>
+<div class="table-box">
 <table>
   <tr><th>层面</th><th>方向</th></tr>
   <tr><td>个人</td><td>把"我为什么难过"换成"难过在我身体的哪里"；反刍启动时用三问刹车；深夜 emo 时练习"在场观看"</td></tr>
@@ -274,6 +306,7 @@
   <tr><td>内容消费</td><td>带着觉知消费 emo 内容：共鸣可以是出口，也可以是饲料，区别只在于你是否在场</td></tr>
   <tr><td>观念</td><td>把"情绪来了就被淹没"改写为"情绪来了就被见证"；承认痛苦的成瘾性，是戒断它的第一步</td></tr>
 </table>
+</div>
 
 <div class="callout tip" data-label="延伸阅读">
   <p>本篇留下一个关键伏笔：痛苦之身为什么总能靠"过去"和"未来"进食？因为喂养它的不止是情绪，还有一种更根本的东西：<strong>心理时间</strong>。深夜反刍发生在过去，焦虑发生在未来，而痛苦之身唯独无法在当下存活。下一篇<strong>《心理时间与钟表时间：deadline 焦虑与"等以后就好了"》</strong>，我们将拆掉痛苦之身的最后一根输血管。</p>
@@ -294,7 +327,7 @@
 
 <footer>
   <p>报告生成时间：2026-07-21 ｜ 精读《当下的力量》系列 · 第 02 篇</p>
-  <p style="margin-top:10px"><a href="index.html">← 返回系列导航</a> ｜ <a href="you-are-not-your-mind.html">上一篇：你不是你的大脑</a></p>
+  <p style="margin-top:10px"><a href="you-are-not-your-mind.html">← 上一篇：你不是你的大脑</a> ｜ <a href="index.html">系列导航</a> ｜ <a href="psychological-time.html">下一篇：心理时间 →</a></p>
 </footer>
 
 </div>
